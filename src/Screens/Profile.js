@@ -93,35 +93,6 @@ const Profile = () => {
         alignItems: 'center',
         marginTop: responsiveScreenHeight(7),
       }}>
-<<<<<<< HEAD
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
-        <View style={{gap:responsiveScreenHeight(8)}}>
-
-        <View>
-          
-      <View style={{flexDirection: 'row', alignItems:"center"}}>
-        <View style={styles.top}>
-          <Image
-            // source={profile}
-            source={images.Profile}
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 70,
-            }}
-            />
-          <TouchableOpacity style={styles.editImage}></TouchableOpacity>
-        </View>
-        <Text style={styles.topText}>Steve Erickson</Text>
-      </View>
-      <View style={styles.searchView}>
-        <TextInput
-          placeholder="Search Settings"
-          style={{
-            width: responsiveScreenWidth(68),
-          }}
-          />
-=======
       <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
         <View style={{gap: responsiveScreenHeight(15)}}>
           <View>
@@ -147,7 +118,6 @@ const Profile = () => {
                   width: responsiveScreenWidth(68),
                 }}
               />
->>>>>>> 22647b94691760645b761c91f4918815eaf30048
               <TouchableOpacity>
                 <Image
                   source={search}
@@ -180,7 +150,7 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: responsiveScreenWidth(2),
+    paddingHorizontal: responsiveScreenWidth(4),
     justifyContent: 'center',
     marginBottom: responsiveScreenHeight(4),
   },
