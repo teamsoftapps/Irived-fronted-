@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthStack from './src/Navigations/AuthStack';
 import MainStack from './src/Navigations/MainStack';
 import {NavigationContainer} from '@react-navigation/native';
-//  shahaszib
+
 const Stack = createNativeStackNavigator();
 const App = () => {
   const [state, setstate] = useState(true);
