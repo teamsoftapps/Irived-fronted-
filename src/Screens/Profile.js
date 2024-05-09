@@ -96,7 +96,7 @@ const Profile = () => {
         marginTop:responsiveScreenHeight(7)
       }}>
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
-        <View style={{gap:responsiveScreenHeight(15)}}>
+        <View style={{gap:responsiveScreenHeight(8)}}>
 
         <View>
           
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: responsiveScreenWidth(4),
+    paddingHorizontal: responsiveScreenWidth(2),
     justifyContent: 'center',
     marginBottom: responsiveScreenHeight(4),
   },
