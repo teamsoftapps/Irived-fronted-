@@ -7,63 +7,31 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-// import { colors, images } from '../utils';
 import {
   responsiveHeight,
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-// import FontFamily from '../../styles/FontFamily';
 
-const TinputWlabel = ({
-  // text = 'asasa',
-  // value,
-  // onChangeText,
-  // onPress = () => {},
-  // secureTextEntry = false,
-  // showImage,
-  // inputstyle = {},
-  // placeholder = 'sasa',
-}) => {
+const TinputWlabel = ({}) => {
   return (
-    <View style={styles.txt_input }>
-    {/* <View style={[styles.txt_input, inputstyle]}> */}
+    <View style={styles.txt_input}>
       <View style={{flex: 1}}>
         <Text
           style={{
-            // color: colors.secondary,
             fontSize: 13,
             marginTop: responsiveHeight(1),
-            // fontFamily: FontFamily.regular,
           }}>
-          {/* {text} */}
-          {"hello"}
+          {'hello'}
         </Text>
 
         <TextInput
-          placeholder={"ali"}
-          // placeholder={placeholder}
+          placeholder={'ali'}
           placeholderTextColor={'white'}
           style={styles.text_Input}
-          // value={value}
-          value={"ali"}
-          // secureTextEntry={secureTextEntry}
-          // onChangeText={onChangeText}
+          value={'ali'}
         />
       </View>
-
-      {/* {!!showImage && (
-        <TouchableOpacity
-        //  onPress={onPress}
-         >
-          <Image
-            tintColor={'white'}
-            // source={showImage}
-            resizeMode="contain"
-            style={styles.imagestyle}
-          />
-        </TouchableOpacity>
-      )} */}
     </View>
   );
 };
