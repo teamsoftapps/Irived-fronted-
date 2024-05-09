@@ -8,14 +8,14 @@ import {
   TextInput,
   FlatList,
   Pressable,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import {
   responsiveFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
-  responsiveHeight
+  responsiveHeight,
 } from 'react-native-responsive-dimensions';
 import profile from '../assets/profile.jpeg';
 // import aa from "../assets"
@@ -26,9 +26,8 @@ import contact from '../assets/contact_icon.png';
 import placeholder from '../assets/placeholder.png';
 import search from '../assets/search.png';
 import info from '../assets/info_icon.png';
-import fav_icon from "../assets/fav_icon.png";
-import { images } from '../utils';
-
+import fav_icon from '../assets/fav_icon.png';
+import {images} from '../utils';
 
 const Profile_settings = [
   {
@@ -59,7 +58,6 @@ const Profile_settings = [
 ];
 
 const renderItem = ({item}) => {
- 
   return (
     <View style={{width: responsiveScreenWidth(80)}}>
       <TouchableOpacity
@@ -92,59 +90,59 @@ const Profile = () => {
     <SafeAreaView
       style={{
         flex: 1,
-        alignItems: "center",
-        marginTop:responsiveScreenHeight(7)
+        alignItems: 'center',
+        marginTop: responsiveScreenHeight(7),
       }}>
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
-        <View style={{gap:responsiveScreenHeight(15)}}>
-
-        <View>
-          
-      <View style={{flexDirection: 'row', alignItems:"center"}}>
-        <View style={styles.top}>
-          <Image
-            // source={profile}
-            source={images.Profile}
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 70,
-            }}
-            />
-          <TouchableOpacity style={styles.editImage}></TouchableOpacity>
-        </View>
-        <Text style={styles.topText}>Steve Erickson</Text>
-      </View>
-      <View style={styles.searchView}>
-        <TextInput
-          placeholder="Search Settings"
-          style={{
-            width: responsiveScreenWidth(68),
-          }}
-          />
+      <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
+        <View style={{gap: responsiveScreenHeight(15)}}>
+          <View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={styles.top}>
+                <Image
+                  // source={profile}
+                  source={images.Profile}
+                  style={{
+                    width: 100,
+                    height: 100,
+                    borderRadius: 70,
+                  }}
+                />
+                <TouchableOpacity style={styles.editImage}></TouchableOpacity>
+              </View>
+              <Text style={styles.topText}>Steve Erickson</Text>
+            </View>
+            <View style={styles.searchView}>
+              <TextInput
+                placeholder="Search Settings"
+                style={{
+                  width: responsiveScreenWidth(68),
+                }}
+              />
               <TouchableOpacity>
-                
-        <Image source={search} style={{ width: 22, height: 22, marginTop: 12 }} />
-        </TouchableOpacity>
-      </View>
+                <Image
+                  source={search}
+                  style={{width: 22, height: 22, marginTop: 12}}
+                />
+              </TouchableOpacity>
+            </View>
 
-      <FlatList
-        data={Profile_settings}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        />
+            <FlatList
+              data={Profile_settings}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+          </View>
+          <TouchableOpacity style={styles.pressable}>
+            <Text style={{fontWeight: '600', color: 'white'}}>Track Order</Text>
+          </TouchableOpacity>
         </View>
-      <TouchableOpacity style={styles.pressable}>
-        <Text style={{fontWeight: '600', color: 'white'}}>Track Order</Text>
-      </TouchableOpacity>
-</View>
-        </ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 export default Profile;
 const styles = StyleSheet.create({
-  main:{flex:1, justifyContent:"space-between"},
+  main: {flex: 1, justifyContent: 'space-between'},
   pressable: {
     backgroundColor: '#4361EE',
     width: responsiveScreenWidth(80),
@@ -171,8 +169,8 @@ const styles = StyleSheet.create({
     paddingTop: responsiveScreenHeight(1),
     marginLeft: responsiveScreenWidth(4.5),
     width: responsiveScreenWidth(40),
-    alignItems: "center",
-    justifyContent:"center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   editImage: {
     position: 'absolute',
@@ -190,7 +188,7 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     flexDirection: 'row',
     marginTop: 20,
-    justifyContent:"space-between",
+    justifyContent: 'space-between',
     width: responsiveScreenWidth(80),
   },
 });

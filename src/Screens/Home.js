@@ -14,12 +14,13 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import chat from "../assets/chat.png"
+import chat from '../assets/chat.png';
 import discount from '../assets/discount.png';
 import shop from '../assets/shop.png';
 import scooter from '../assets/scooter.png';
-import back from "../assets/arrow-back.png"
-
+import back from '../assets/arrow-back.png';
+import WrapperContainer from '../Components/WrapperContainer';
+import HeaderComponent from '../Components/Headers/HeaderComponent';
 
 const notification = [
   {
@@ -70,7 +71,6 @@ const notification = [
 ];
 
 const renderItem = ({item}) => {
- 
   return (
     <TouchableOpacity style={styles.notification}>
       <View
@@ -101,7 +101,8 @@ const renderItem = ({item}) => {
               width: 34,
               height: 17,
               textAlign: 'center',
-              fontSize:11
+              fontSize: 11,
+              backgroundColor: 'red',
             }}>
             New
           </Text>
@@ -116,7 +117,8 @@ const renderItem = ({item}) => {
 
 const Profile = () => {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#F5F5F5'}}>
+    <WrapperContainer>
+      <HeaderComponent />
       <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
         <View style={styles.main}>
           <View style={styles.topbar}>
@@ -145,7 +147,7 @@ const Profile = () => {
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </WrapperContainer>
   );
 };
 
@@ -158,16 +160,18 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingHorizontal: responsiveWidth(4),
     paddingVertical: responsiveHeight(2),
-    marginTop:20
-  }, topbar: {
+    marginTop: 20,
+    elevation: 5,
+  },
+  topbar: {
     width: responsiveWidth(83),
-    flexDirection: "row",
-    alignItems:"center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   main: {
     flex: 1,
     alignItems: 'center',
-    marginTop:20
+    marginTop: 20,
   },
   heading: {
     fontWeight: '600',
