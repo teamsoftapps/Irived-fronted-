@@ -7,24 +7,26 @@ import {
 } from 'react-native-responsive-dimensions';
 import {images} from '../../utils';
 
-const HeaderComponent = ({text = ''}) => {
+const HeaderComponent = ({text = '', style = {}, textstyle = {}}) => {
   return (
-    <View style={styles.topbar}>
+    <View style={{...styles.container, ...style}}>
       <TouchableOpacity style={{}}>
         <Image
           source={images.back}
-          style={{width: responsiveWidth(6), height: responsiveHeight(2.5)}}
+          style={{
+            width: responsiveWidth(6),
+            height: responsiveHeight(2.8),
+            resizeMode: 'contain',
+          }}
         />
       </TouchableOpacity>
       <View style={{flex: 1}}>
         <Text
           style={{
-            fontSize: responsiveFontSize(2.5),
-            color: 'black',
-            fontWeight: '600',
-            textAlign: 'center',
+            ...styles.textstyle,
+            ...textstyle,
           }}>
-          Cart
+          {text}
         </Text>
       </View>
     </View>
@@ -34,11 +36,16 @@ const HeaderComponent = ({text = ''}) => {
 export default HeaderComponent;
 
 const styles = StyleSheet.create({
-  topbar: {
+  container: {
     height: responsiveHeight(10),
     paddingHorizontal: responsiveWidth(8),
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+  },
+  textstyle: {
+    fontSize: responsiveFontSize(2.5),
+    color: 'black',
+    fontWeight: '600',
+    textAlign: 'center',
   },
 });

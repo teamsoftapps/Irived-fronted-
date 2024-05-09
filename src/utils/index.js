@@ -5,6 +5,9 @@ export const images = {
   logoMain: require('../assets/logo.png'),
   profile: require('../assets/profile.jpeg'),
   back: require('../assets/arrow-back.png'),
+  editpro: require('../assets/editpro.png'),
+  search: require('../assets/search.png'),
+  arrow: require('../assets/arrow.png'),
 };
 
 export const colors = {
