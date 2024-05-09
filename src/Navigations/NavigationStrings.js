@@ -7,4 +7,5 @@ export default {
   ORDERS: 'Orders',
   MESSAGE: 'Message',
   PROFILE: 'PROFILE',
+  Cart: 'Cart',
 };
