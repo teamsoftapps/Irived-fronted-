@@ -7,15 +7,15 @@ import {
 } from 'react-native-responsive-dimensions';
 import {images} from '../../utils';
 
-const HeaderComponent = ({text = '', style = {}, textstyle = {}}) => {
+const HeaderComponent = ({top_text= '', bottom_text, style = {}, top_text_style = {}, bottom_text_style = {}, icon="back"}) => {
   return (
     <View style={{...styles.container, ...style}}>
       <TouchableOpacity style={{}}>
         <Image
-          source={images.back}
+          source={images[icon]}
           style={{
-            width: responsiveWidth(6),
-            height: responsiveHeight(2.8),
+            width: responsiveWidth(8),
+            height: responsiveHeight(4),
             resizeMode: 'contain',
           }}
         />
@@ -23,10 +23,17 @@ const HeaderComponent = ({text = '', style = {}, textstyle = {}}) => {
       <View style={{flex: 1}}>
         <Text
           style={{
-            ...styles.textstyle,
-            ...textstyle,
+            ...styles.top_text_style,
+            ...top_text_style,
           }}>
-          {text}
+          {top_text}
+        </Text>
+        <Text
+          style={{
+            ...styles.bottom_text_style,
+            ...bottom_text_style,
+          }}>
+          {bottom_text}
         </Text>
       </View>
     </View>
@@ -42,10 +49,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  textstyle: {
+  top_text_style: {
     fontSize: responsiveFontSize(2.5),
     color: 'black',
     fontWeight: '600',
-    textAlign: 'center',
+    textAlign:"left",
+    marginLeft:responsiveWidth(4)
   },
+  bottom_text_style:{
+    fontSize:responsiveFontSize(2),
+    marginLeft:responsiveWidth(4),
+    color:"grey",
+    fontWeight:"400",
+    textAlign:"left"
+  }
 });

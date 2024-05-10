@@ -8,6 +8,9 @@ export const images = {
   editpro: require('../assets/editpro.png'),
   search: require('../assets/search.png'),
   arrow: require('../assets/arrow.png'),
+  call_icon:require("../assets/call.png"),
+  send_icon:require("../assets/send.png"),
+  close_icon:require("../assets/close.png")
 };
 
 export const colors = {
