@@ -1,13 +1,11 @@
 import {
   StyleSheet,
-  SafeAreaView,
   Text,
   View,
   Image,
   TouchableOpacity,
   TextInput,
   FlatList,
-  Pressable,
   ScrollView,
 } from 'react-native';
 import React from 'react';
@@ -18,42 +16,33 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import profile from '../assets/profile.jpeg';
-// import aa from "../assets"
-import arrow from '../assets/arrow.png';
-import language from '../assets/lang_icon.png';
-import payment from '../assets/payment_icon.png';
-import contact from '../assets/contact_icon.png';
-
-import info from '../assets/info_icon.png';
-import fav_icon from '../assets/fav_icon.png';
 import {images} from '../utils';
 import WrapperContainer from '../Components/WrapperContainer';
 import ButtonComp from '../Components/ButtonComp';
 
 const Profile_settings = [
   {
-    icon: info,
+    icon: images.info,
     id: 1,
     name: 'Personal Information',
   },
   {
-    icon: language,
+    icon: images.language,
     id: 2,
     name: 'Language',
   },
   {
-    icon: fav_icon,
+    icon: images.favourite,
     id: 3,
     name: 'Favorites',
   },
   {
-    icon: payment,
+    icon: images.payment,
     id: 4,
     name: 'Payment Methods',
   },
   {
-    icon: contact,
+    icon: images.contact,
     id: 5,
     name: 'Contact Support',
   },

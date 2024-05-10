@@ -1,6 +1,7 @@
 import {Text, StyleSheet, View} from 'react-native';
 import React, {Component} from 'react';
 import WrapperContainer from '../Components/WrapperContainer';
+import {FontFamily} from '../utils';
 
 const products = [
   {
@@ -14,7 +15,7 @@ const products = [
 const Cart = () => {
   return (
     <WrapperContainer>
-      <Text>Cart</Text>
+      <Text style={{fontFamily: FontFamily.Light, fontSize: 50}}>Cart</Text>
     </WrapperContainer>
   );
 };
