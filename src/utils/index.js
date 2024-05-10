@@ -16,6 +16,8 @@ export const images = {
   favourite: require('../assets/images/fav_icon.png'),
   payment: require('../assets/images/payment_icon.png'),
   contact: require('../assets/images/contact_icon.png'),
+  fav_unselected: require('../assets/images/fav1.png'),
+  fav_selected: require('../assets/images/fav2.png'),
 };
 
 export const colors = {
