@@ -8,10 +8,10 @@ import {NavigationContainer} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
-  const [state, setstate] = useState(false);
+  const [state, setstate] = useState(true);
   return (
     <NavigationContainer>
-      {state ? <AuthStack /> : <MainStack />}
+      {!state ? <AuthStack /> : <MainStack />}
     </NavigationContainer>
   );
 };

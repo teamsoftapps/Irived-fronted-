@@ -6,12 +6,13 @@ import Orders from '../Screens/Orders';
 import Message from '../Screens/Message';
 import Profile from '../Screens/Profile';
 import NavigationStrings from './NavigationStrings';
+import Cart from '../Screens/Cart';
 
 const Bottom = createBottomTabNavigator();
 const BottomStack = () => {
   return (
     <Bottom.Navigator screenOptions={{headerShown: false}}>
-      <Bottom.Screen name={NavigationStrings.HOME} component={Home} />
+      <Bottom.Screen name={NavigationStrings.Cart} component={Cart} />
       <Bottom.Screen name={NavigationStrings.ORDERS} component={Orders} />
       <Bottom.Screen name={NavigationStrings.MESSAGE} component={Message} />
       <Bottom.Screen name={NavigationStrings.PROFILE} component={Profile} />
