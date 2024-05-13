@@ -18,6 +18,15 @@ export const images = {
   contact: require('../assets/images/contact_icon.png'),
   fav_unselected: require('../assets/images/fav1.png'),
   fav_selected: require('../assets/images/fav2.png'),
+  check: require('../assets/images/check.png'),
+  showeye: require('../assets/images/showeye.png'),
+  hideeye: require('../assets/images/hideeye.png'),
+  bell: require('../assets/images/bell.png'),
+  cart: require('../assets/images/cart.png'),
+  chat: require('../assets/images/chat.png'),
+  discount: require('../assets/images/discount.png'),
+  shop: require('../assets/images/shop.png'),
+  scooter: require('../assets/images/scooter.png'),
 };
 
 export const colors = {

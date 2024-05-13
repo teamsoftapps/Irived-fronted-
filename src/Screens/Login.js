@@ -2,123 +2,209 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
   ScrollView,
   ImageBackground,
-  TextInput,
   Image,
-  Pressable,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar,
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-// import {respo}
-import React from 'react';
-import {images} from '../utils';
-import {TinputWlabel} from '../Components/TinputWlabel';
+import React, {useState} from 'react';
+import {FontFamily, images} from '../utils';
+import {BlurView} from '@react-native-community/blur';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import TinputWlabel from '../Components/TinputWlabel';
+import ButtonComp from '../Components/ButtonComp';
+import {useNavigation} from '@react-navigation/native';
+import NavigationStrings from '../Navigations/NavigationStrings';
 const Login = () => {
+  const [isCheck, setisCheck] = useState(false);
+  const [isVisible, setisVisible] = useState(true);
+  const navigation = useNavigation();
   return (
-    <ImageBackground source={images.authBg} style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        {/* <ScrollView
-          contentContainerStylestyle={styles.Scrollcontainer}
-          // style={{backgroundColor: 'red'}}
-          > */}
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop:responsiveWidth(30)}}>
-          <View
-            style={{
-              height:responsiveHeight(50),
-              gap: responsiveWidth(6),
-              borderColor: 'white',
-              // flex: 0.6,
-              borderWidth: responsiveWidth(0.4),
-              width: responsiveWidth(90),
-              borderRadius: responsiveWidth(2),
-              // paddingLeft:responsiveWidth(2),
-              // alignItems:'center'
-              // gap:responsiveWidth(),
-              justifyContent:"center"
-              // marginRight:responsiveWidth(10)
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ImageBackground
+        resizeMode="cover"
+        source={images.authBg}
+        style={styles.container}>
+        <StatusBar hidden />
+
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'android' ? 'padding' : 'height'}
+          style={{flex: 1}}>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              Keyboard.dismiss();
             }}>
-
-              <View><Image style={{    marginLeft:responsiveWidth(3.5),width:responsiveWidth(20), height:responsiveWidth(11)}} source={images.logoMain}></Image></View>
-              <View>
-              <Text
-              style={{
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: responsiveFontSize(3),
-                marginLeft:responsiveWidth(3.5)
-                
-              }}>
-              Welcome Back!
-            </Text>
-            <Text style={{    marginLeft:responsiveWidth(3.5), color: 'white'}}>Signin to continue</Text>
-              </View>
-          
-          <View style={{ gap:responsiveWidth(2)}}>
-
-            <TextInput  placeholderTextColor='white' placeholder='Email' style={styles.textInput}/>
-            <TextInput  placeholderTextColor='white'  placeholder='Password' style={styles.textInput}/>
-          </View>
-            <TouchableOpacity  style={styles.pressable}>
-          <Text style={{fontWeight: '600', color: 'white'}}>Sign in</Text>
-        </TouchableOpacity>
-            
-            {/* <View> */}
-            {/* <TinputWlabel/> */}
-            {/* </View> */}
-          </View>
-        </View>
-        {/* </ScrollView> */}
-      </SafeAreaView>
-    </ImageBackground>
+            <SafeAreaView style={styles.safearea}>
+              <BlurView
+                style={{
+                  width: responsiveWidth(90),
+                  height: responsiveHeight(70),
+                  overflow: 'hidden',
+                }}
+                blurAmount={1}
+                blurRadius={5}
+                blurType="light">
+                <View style={styles.childBlur}>
+                  <Text
+                    style={{
+                      fontFamily: FontFamily.Bold,
+                      color: '#fff',
+                      fontSize: responsiveFontSize(4),
+                    }}>
+                    Irived
+                  </Text>
+                  <Text style={styles.welcome}>Welcome Back!</Text>
+                  <Text style={styles.signin}>Sign in to continue</Text>
+                  <View style={{marginVertical: responsiveHeight(3)}}>
+                    <TinputWlabel imagee={images.check} header="Email" />
+                    <TinputWlabel
+                      imageOnpress={() => {
+                        setisVisible(!isVisible);
+                      }}
+                      imagee={isVisible ? images.showeye : images.hideeye}
+                      secureTextEntry={isVisible}
+                      header="Password"
+                      containerstyle={{marginTop: responsiveHeight(2)}}
+                    />
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginTop: responsiveHeight(2),
+                      }}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          setisCheck(!isCheck);
+                        }}
+                        style={{
+                          ...styles.checkbox,
+                          borderColor: isCheck ? '#fff' : '#d7d7d7',
+                        }}>
+                        {isCheck && (
+                          <Image
+                            source={images.check}
+                            style={{
+                              width: responsiveWidth(4),
+                              height: responsiveHeight(2),
+                              tintColor: '#fff',
+                            }}
+                          />
+                        )}
+                      </TouchableOpacity>
+                      <Text style={styles.remember}>Remember me</Text>
+                      <TouchableOpacity>
+                        <Text
+                          style={{
+                            color: '#4361EE',
+                            fontSize: responsiveFontSize(1.8),
+                            fontFamily: FontFamily.Bold,
+                          }}>
+                          Forgot Password?
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <ButtonComp
+                    onPress={() => {
+                      navigation.replace(NavigationStrings.SIGN_UP);
+                    }}
+                    text="Sign In"
+                  />
+                  <Text
+                    style={{
+                      color: '#d7d7d7',
+                      fontSize: responsiveFontSize(1.8),
+                      fontFamily: FontFamily.Medium,
+                    }}>
+                    Don't have an account?
+                    <Text
+                      onPress={() => {
+                        navigation.navigate(NavigationStrings.SIGN_UP);
+                      }}
+                      style={{
+                        color: '#4361EE',
+                        fontSize: responsiveFontSize(1.8),
+                        fontFamily: FontFamily.Bold,
+                      }}>
+                      {' '}
+                      Sign Up
+                    </Text>
+                  </Text>
+                </View>
+              </BlurView>
+            </SafeAreaView>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </ScrollView>
   );
 };
 
 export default Login;
 
 const styles = StyleSheet.create({
-
-  pressable: {
-    alignSelf:"center",
-    backgroundColor: '#4361EE',
-    width: responsiveWidth(80),
-    height: responsiveHeight(7),
-    borderRadius: responsiveHeight(10),
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: responsiveWidth(4),
-    justifyContent: 'center',
-    marginBottom: responsiveHeight(4),
-  }
-,
-  textInput: {
-    alignSelf:"center",
-    // backgroundColor:"red",
-    color: 'white',
-    right: responsiveWidth(1),
-    fontSize: responsiveFontSize(1.5),
-    paddingRight: responsiveWidth(3),
-    height: responsiveHeight(6),
-    alignSelf:"center",
-    width:responsiveWidth(80),
-    borderColor:"white",
-    borderWidth:responsiveWidth(.5),
-    borderRadius:responsiveWidth(2),
-    // fontFamily:res
-    // fontFamily: FontFamily.regular,
-  },
   container: {
     flex: 1,
+    height: Dimensions.get('window').height,
+  },
+  safearea: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  childBlur: {
+    width: '100%',
+    height: '100%',
+    borderWidth: responsiveHeight(0.1),
+    borderRadius: responsiveHeight(1),
+    borderColor: '#fff',
+    overflow: 'hidden',
+    paddingVertical: responsiveHeight(5),
+    paddingHorizontal: responsiveWidth(5),
+  },
+  welcome: {
+    fontFamily: FontFamily.Semi_Bold,
+    color: '#fff',
+    fontSize: responsiveFontSize(3.5),
+    marginTop: responsiveHeight(2),
+  },
+  signin: {
+    fontFamily: FontFamily.Regular,
+    color: '#d7d7d7',
+    fontSize: responsiveFontSize(2),
+    marginTop: responsiveHeight(2),
+  },
+  checkbox: {
+    width: responsiveWidth(6),
+    height: responsiveHeight(3),
+    borderRadius: responsiveHeight(1),
+    borderWidth: responsiveHeight(0.2),
+
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  remember: {
+    color: '#d7d7d7',
+    fontSize: responsiveFontSize(1.8),
+    fontFamily: FontFamily.Medium,
+    flex: 1,
+    marginLeft: responsiveWidth(2),
   },
   Scrollcontainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // flexGrow: 1,
   },
 });

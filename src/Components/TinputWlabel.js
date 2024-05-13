@@ -8,30 +8,48 @@ import {
 } from 'react-native';
 import React from 'react';
 import {
+  responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
-  responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import {FontFamily} from '../utils';
 
-const TinputWlabel = ({}) => {
+const TinputWlabel = ({
+  header = '',
+  containerstyle = {},
+  onChangeText,
+  value,
+  imagee,
+  secureTextEntry = false,
+  imageOnpress,
+}) => {
   return (
-    <View style={styles.txt_input}>
+    <View style={{...styles.container, ...containerstyle}}>
       <View style={{flex: 1}}>
-        <Text
-          style={{
-            fontSize: 13,
-            marginTop: responsiveHeight(1),
-          }}>
-          {'hello'}
-        </Text>
-
+        <Text style={styles.headertext}>{header}</Text>
         <TextInput
-          placeholder={'ali'}
-          placeholderTextColor={'white'}
-          style={styles.text_Input}
-          value={'ali'}
+          secureTextEntry={secureTextEntry}
+          onChangeText={onChangeText}
+          value={value}
+          style={{
+            paddingRight: responsiveWidth(4),
+            color: '#FFF',
+            fontSize: responsiveFontSize(1.6),
+            fontFamily: FontFamily.Regular,
+          }}
         />
       </View>
+      <TouchableOpacity onPress={imageOnpress}>
+        <Image
+          source={imagee}
+          style={{
+            width: responsiveWidth(4),
+            height: responsiveHeight(4),
+            resizeMode: 'contain',
+            tintColor: '#fff',
+          }}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -39,30 +57,21 @@ const TinputWlabel = ({}) => {
 export default TinputWlabel;
 
 const styles = StyleSheet.create({
-  txt_input: {
-    // backgroundColor: colors.primary,
+  container: {
+    borderColor: '#fff',
     height: responsiveHeight(8),
-    borderWidth: responsiveWidth(0.2),
-    borderColor: 'white',
-    width: responsiveWidth(88),
-    borderRadius: responsiveWidth(2),
-    paddingHorizontal: responsiveWidth(5),
-    justifyContent: 'space-between',
+    borderRadius: responsiveHeight(1),
+    borderWidth: responsiveHeight(0.1),
+    paddingHorizontal: responsiveWidth(4),
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-
     overflow: 'hidden',
   },
-  text_Input: {
-    color: 'white',
-    right: responsiveWidth(1),
-    fontSize: responsiveFontSize(1.5),
-    paddingRight: responsiveWidth(3),
-    height: responsiveHeight(5),
-    // fontFamily: FontFamily.regular,
-  },
-  imagestyle: {
-    height: responsiveWidth(4),
-    width: responsiveWidth(4),
+  headertext: {
+    color: '#d7d7d7',
+    top: responsiveHeight(1),
+    fontFamily: FontFamily.Medium,
+    fontSize: responsiveFontSize(1.7),
   },
 });
