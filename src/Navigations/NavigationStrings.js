@@ -8,4 +8,5 @@ export default {
   MESSAGE: 'Message',
   PROFILE: 'PROFILE',
   Cart: 'Cart',
+  NOTIFICATION: 'Notification',
 };

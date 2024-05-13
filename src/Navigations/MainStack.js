@@ -3,6 +3,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BottomStack from './BottomStack';
 import NavigationStrings from './NavigationStrings';
+import Notification from '../Screens/Notification';
 
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
@@ -11,6 +12,10 @@ const MainStack = () => {
       <Stack.Screen
         name={NavigationStrings.BOTTOM_STACK}
         component={BottomStack}
+      />
+      <Stack.Screen
+        name={NavigationStrings.NOTIFICATION}
+        component={Notification}
       />
     </Stack.Navigator>
   );

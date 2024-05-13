@@ -14,19 +14,16 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import chat from '../assets/chat.png';
-import discount from '../assets/discount.png';
-import shop from '../assets/shop.png';
-import scooter from '../assets/scooter.png';
-import back from '../assets/arrow-back.png';
+
 import WrapperContainer from '../Components/WrapperContainer';
 import HeaderComponent from '../Components/Headers/HeaderComponent';
+import {images} from '../utils';
 
 const notification = [
   {
     title: 'Order Confirmation',
     date: '19, Dec, 2023 | 20:50 PM',
-    icon: shop,
+    icon: images.shop,
     id: 1,
     new: true,
     description:
@@ -35,7 +32,7 @@ const notification = [
   {
     title: 'Special Offer Alert',
     date: '19, Jan, 2024 | 18:40 PM',
-    icon: discount,
+    icon: images.discount,
     id: 2,
     new: false,
     description:
@@ -44,7 +41,7 @@ const notification = [
   {
     title: 'Feedback Request',
     date: '19, Jan, 2024 | 18:40 PM',
-    icon: chat,
+    icon: images.chat,
     id: 3,
     new: true,
     description:
@@ -53,7 +50,7 @@ const notification = [
   {
     title: 'Delivery Delay Notice',
     date: '19, Jan, 2024 | 18:40 PM',
-    icon: scooter,
+    icon: images.scooter,
     id: 4,
     new: false,
     description:
@@ -62,7 +59,7 @@ const notification = [
   {
     title: 'Delivery Delay Notice',
     date: '19, Jan, 2024 | 18:40 PM',
-    icon: scooter,
+    icon: images.scooter,
     id: 5,
     new: false,
     description:
