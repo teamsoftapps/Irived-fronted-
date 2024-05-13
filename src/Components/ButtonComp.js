@@ -6,9 +6,10 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-const ButtonComp = ({text = '', style = {}, textstyle = {}}) => {
+const ButtonComp = ({text = '', style = {}, textstyle = {}, onPress}) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       activeOpacity={0.9}
       style={{...styles.pressable, ...style}}>
       <Text style={{...styles.textstyle, ...textstyle}}>{text}</Text>

@@ -3,7 +3,9 @@ export const images = {
   Profile: require('../assets/images/profile.jpg'),
   authBg: require('../assets/images/Authbg.png'),
   logoMain: require('../assets/images/logo.png'),
-  profile: require('../assets/images/profile.jpeg'),
+  user1: require('../assets/images/profile.jpeg'),
+  user2: require('../assets/images/profile.jpeg'),
+  user3: require('../assets/images/profile.jpeg'),
   back: require('../assets/images/arrow-back.png'),
   editpro: require('../assets/images/editpro.png'),
   search: require('../assets/images/search.png'),
@@ -18,6 +20,9 @@ export const images = {
   contact: require('../assets/images/contact_icon.png'),
   fav_unselected: require('../assets/images/fav1.png'),
   fav_selected: require('../assets/images/fav2.png'),
+  product: require("../assets/images/prdouctimage.png"),
+  product1: require("../assets/images/prdouctimage(1).png"),
+  product2: require("../assets/images/prdouctimage(2).png")
 };
 
 export const colors = {
