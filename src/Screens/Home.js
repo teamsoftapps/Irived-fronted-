@@ -30,7 +30,7 @@ const Home = () => {
             gap: responsiveHeight(2),
           }}>
           <Image
-            source={images.profile}
+            source={images.user1}
             style={{
               width: responsiveWidth(17),
               height: responsiveWidth(17),

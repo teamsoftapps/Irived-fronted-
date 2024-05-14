@@ -5,7 +5,6 @@ import Login from '../Screens/Login';
 
 import Signup from '../Screens/Signup';
 import NavigationStrings from './NavigationStrings';
-import Onboarding from '../Screens/Onboarding';
 
 const Stack = createNativeStackNavigator();
 const AuthStack = () => {

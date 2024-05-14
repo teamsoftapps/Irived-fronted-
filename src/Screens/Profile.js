@@ -51,12 +51,7 @@ const Profile_settings = [
 const renderItem = ({item}) => {
   return (
     <TouchableOpacity
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: responsiveHeight(4),
-      }}>
+      style={styles.option_container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Image
           source={item.icon}
@@ -66,12 +61,7 @@ const renderItem = ({item}) => {
           }}
         />
         <Text
-          style={{
-            fontSize: responsiveFontSize(2),
-            fontWeight: '600',
-            marginLeft: responsiveWidth(4),
-            color: 'black',
-          }}>
+          style={styles.option_text}>
           {item.name}
         </Text>
       </View>
@@ -101,13 +91,7 @@ const Profile = () => {
               <View style={styles.top}>
                 <Image
                   source={images.Profile}
-                  style={{
-                    width: responsiveHeight(15),
-                    height: responsiveHeight(15),
-                    borderRadius: responsiveHeight(15),
-                    borderWidth: responsiveHeight(0.4),
-                    borderColor: '#fff',
-                  }}
+                  style={styles.profile_image}
                 />
                 <TouchableOpacity style={styles.editImage}>
                   <Image
@@ -157,6 +141,25 @@ const Profile = () => {
 };
 export default Profile;
 const styles = StyleSheet.create({
+  profile_image: {
+    width: responsiveHeight(15),
+    height: responsiveHeight(15),
+    borderRadius: responsiveHeight(15),
+    borderWidth: responsiveHeight(0.4),
+    borderColor: '#fff',
+  },
+  option_text: {
+    fontSize: responsiveFontSize(2),
+    fontWeight: '600',
+    marginLeft: responsiveWidth(4),
+    color: 'black',
+  },
+  option_container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: responsiveHeight(4),
+  },
   main: {justifyContent: 'space-between'},
   pressable: {
     backgroundColor: '#4361EE',
