@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import WrapperContainer from '../Components/WrapperContainer';
 
 const Cart = () => {
   return (
-    <View>
+    <WrapperContainer>
+      <View>
       <Text>Cart</Text>
     </View>
+    </WrapperContainer>
   );
 };
 

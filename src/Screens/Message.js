@@ -26,7 +26,7 @@ const Message = () => {
               <Image source={images.back} style={styles.back} />
             </TouchableOpacity>
 
-            <Image source={images.profile} style={styles.profile_image} />
+            <Image source={images.user1} style={styles.profile_image} />
             <View>
               <Text style={styles.user}>Martin Mork</Text>
               <View style={styles.online}>
