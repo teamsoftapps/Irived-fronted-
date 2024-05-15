@@ -32,6 +32,16 @@ export const images = {
   discount: require('../assets/images/discount.png'),
   shop: require('../assets/images/shop.png'),
   scooter: require('../assets/images/scooter.png'),
+  heart: require('../assets/images/heart.png'),
+  heart_filled: require('../assets/images/heart-filled.png'),
+  home: require('../assets/images/Home_icon.png'),
+  office: require('../assets/images/office_icon.png'),
+  plus: require('../assets/images/Plus.png'),
+  minus: require('../assets/images/Min.png'),
+  store: require("../assets/images/store-photo.png"),
+  star: require("../assets/images/star.png"),
+  location: require("../assets/images/location-pointer.png"),
+  plus_slim:require("../assets/images/add_icon.png")
 };
 
 export const colors = {
