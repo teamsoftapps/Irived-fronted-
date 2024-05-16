@@ -104,7 +104,7 @@ const Cart = () => {
                                 onPress={() => {
                                     if (products >= 1) setproducts(products - 1);
                                 }}>
-                                <Text style={styles.button_text}>-</Text>
+                                <Image source={images.minus} style={{ width: responsiveWidth(3), tintColor: "black", height: responsiveWidth(0.6) }} />
                             </TouchableOpacity>
                             <Text
                                 style={{
@@ -119,7 +119,8 @@ const Cart = () => {
                                 onPress={() => {
                                     setproducts(products + 1);
                                 }}>
-                                <Text style={styles.button_text}>+</Text>
+                                <Image source={images.plus} style={{ width: responsiveWidth(3), tintColor: "black", height: responsiveWidth(3) }} />
+
                             </TouchableOpacity>
                         </View>
                     </View>

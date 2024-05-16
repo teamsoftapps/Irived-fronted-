@@ -1,20 +1,20 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import WrapperContainer from '../Components/WrapperContainer';
-import { FontFamily, images } from '../utils';
+import {FontFamily, images} from '../utils';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import TextInputComp from '../Components/Headers/TextInputComp';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import NavigationStrings from '../Navigations/NavigationStrings';
 
 const Home = () => {
   const navigation = useNavigation();
   return (
-    <WrapperContainer style={{ flex: 1, paddingHorizontal: responsiveWidth(6) }}>
+    <WrapperContainer style={{flex: 1, paddingHorizontal: responsiveWidth(6)}}>
       <View
         style={{
           flexDirection: 'row',
@@ -79,7 +79,7 @@ const Home = () => {
       </View>
 
       <TextInputComp
-        style={{ marginTop: responsiveHeight(2) }}
+        style={{marginTop: responsiveHeight(2)}}
         placeholder="Search products"
       />
 
