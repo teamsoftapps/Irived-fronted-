@@ -12,7 +12,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {FontFamily} from '../utils';
+import { FontFamily } from '../utils';
 
 const TinputWlabel = ({
   header = '',
@@ -24,8 +24,8 @@ const TinputWlabel = ({
   imageOnpress,
 }) => {
   return (
-    <View style={{...styles.container, ...containerstyle}}>
-      <View style={{flex: 1}}>
+    <View style={{ ...styles.container, ...containerstyle }}>
+      <View style={{ flex: 1 }}>
         <Text style={styles.headertext}>{header}</Text>
         <TextInput
           secureTextEntry={secureTextEntry}

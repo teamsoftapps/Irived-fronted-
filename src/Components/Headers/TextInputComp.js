@@ -1,20 +1,20 @@
-import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import React from 'react';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {FontFamily, images} from '../../utils';
+import { FontFamily, images } from '../../utils';
 
-const TextInputComp = ({placeholder = '', style = {}}) => {
+const TextInputComp = ({ placeholder = '', style = {} }) => {
   return (
-    <View style={{...styles.container, ...style}}>
+    <View style={{ ...styles.container, ...style }}>
       <Image
         source={images.search}
         style={{
           width: responsiveWidth(6),
-          height: responsiveHeight(6),
+          height: responsiveHeight(4),
           resizeMode: 'contain',
           tintColor: 'gray',
         }}

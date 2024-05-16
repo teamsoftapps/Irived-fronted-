@@ -32,6 +32,7 @@ export const images = {
   discount: require('../assets/images/discount.png'),
   shop: require('../assets/images/shop.png'),
   scooter: require('../assets/images/scooter.png'),
+  rectblur: require('../assets/images/rectblur.png'),
 };
 
 export const colors = {

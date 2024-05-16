@@ -18,13 +18,13 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import React, {useState} from 'react';
-import {FontFamily, images} from '../utils';
-import {BlurView} from '@react-native-community/blur';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import React, { useState } from 'react';
+import { FontFamily, images } from '../utils';
+import { BlurView } from '@react-native-community/blur';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import TinputWlabel from '../Components/TinputWlabel';
 import ButtonComp from '../Components/ButtonComp';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import NavigationStrings from '../Navigations/NavigationStrings';
 
 const Signup = () => {
@@ -32,7 +32,7 @@ const Signup = () => {
   const [isVisible, setisVisible] = useState(true);
   const navigation = useNavigation();
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <ImageBackground
         resizeMode="cover"
         source={images.authBg}
@@ -41,7 +41,7 @@ const Signup = () => {
 
         <KeyboardAvoidingView
           behavior={Platform.OS === 'android' ? 'padding' : 'height'}
-          style={{flex: 1}}>
+          style={{ flex: 1 }}>
           <TouchableWithoutFeedback
             onPress={() => {
               Keyboard.dismiss();
@@ -50,7 +50,7 @@ const Signup = () => {
               <BlurView
                 style={{
                   width: responsiveWidth(90),
-                  height: responsiveHeight(80),
+                  // height: responsiveHeight(80),
                   overflow: 'hidden',
                 }}
                 blurAmount={1}
@@ -67,10 +67,10 @@ const Signup = () => {
                   </Text>
 
                   <Text style={styles.signin}>Create an account</Text>
-                  <View style={{marginVertical: responsiveHeight(3)}}>
+                  <View style={{ marginVertical: responsiveHeight(3) }}>
                     <TinputWlabel imagee={images.check} header="Full Name" />
                     <TinputWlabel
-                      containerstyle={{marginTop: responsiveHeight(2)}}
+                      containerstyle={{ marginTop: responsiveHeight(2) }}
                       imagee={images.check}
                       header="Email"
                     />
@@ -81,7 +81,7 @@ const Signup = () => {
                       imagee={isVisible ? images.showeye : images.hideeye}
                       secureTextEntry={isVisible}
                       header="Confirm Password"
-                      containerstyle={{marginTop: responsiveHeight(2)}}
+                      containerstyle={{ marginTop: responsiveHeight(2) }}
                     />
                     <TinputWlabel
                       imageOnpress={() => {
@@ -90,7 +90,7 @@ const Signup = () => {
                       imagee={isVisible ? images.showeye : images.hideeye}
                       secureTextEntry={isVisible}
                       header="Password"
-                      containerstyle={{marginTop: responsiveHeight(2)}}
+                      containerstyle={{ marginTop: responsiveHeight(2) }}
                     />
                     {/* <View
                       style={{
@@ -180,8 +180,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   childBlur: {
-    width: '100%',
-    height: '100%',
+
     borderWidth: responsiveHeight(0.1),
     borderRadius: responsiveHeight(1),
     borderColor: '#fff',

@@ -17,7 +17,7 @@ import {
 
 import WrapperContainer from '../Components/WrapperContainer';
 import HeaderComponent from '../Components/Headers/HeaderComponent';
-import {images} from '../utils';
+import { images } from '../utils';
 
 const notification = [
   {
@@ -67,7 +67,7 @@ const notification = [
   },
 ];
 
-const renderItem = ({item}) => {
+const renderItem = ({ item }) => {
   return (
     <TouchableOpacity activeOpacity={0.8} style={styles.notification}>
       <View
@@ -76,7 +76,7 @@ const renderItem = ({item}) => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <Image
             source={item.icon}
             style={{
@@ -84,7 +84,7 @@ const renderItem = ({item}) => {
               height: responsiveHeight(7),
             }}
           />
-          <View style={{marginLeft: responsiveWidth(3)}}>
+          <View style={{ marginLeft: responsiveWidth(3) }}>
             <Text style={styles.heading}>{item.title}</Text>
             <Text style={styles.date}>{item.date}</Text>
           </View>
@@ -92,12 +92,12 @@ const renderItem = ({item}) => {
         {item.new && (
           <View
             style={{
-              width: responsiveHeight(6),
+              width: responsiveWidth(11),
               height: responsiveHeight(3),
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: '#4361EE',
-              borderRadius: responsiveWidth(5),
+              borderRadius: responsiveWidth(2),
             }}>
             <Text
               style={{
@@ -109,10 +109,10 @@ const renderItem = ({item}) => {
           </View>
         )}
       </View>
-      <View style={{marginVertical: responsiveHeight(2)}}>
+      <View style={{ marginVertical: responsiveHeight(2) }}>
         <Text
           numberOfLines={4}
-          style={{color: 'black', fontSize: responsiveFontSize(1.8)}}>
+          style={{ color: 'black', fontSize: responsiveFontSize(1.8) }}>
           {item.description}
         </Text>
       </View>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveWidth(4),
     paddingVertical: responsiveHeight(2),
     margin: responsiveHeight(1),
-    elevation: responsiveWidth(2),
+    elevation: responsiveWidth(.5),
   },
 
   main: {
