@@ -16,4 +16,4 @@ const Routes = () => {
     </Provider>
   );
 };
-AppRegistry.registerComponent(appName, () => Favourites);
+AppRegistry.registerComponent(appName, () => App);
