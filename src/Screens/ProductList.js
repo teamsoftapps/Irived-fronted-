@@ -15,11 +15,10 @@ import {
 } from 'react-native-responsive-dimensions';
 import WrapperContainer from '../Components/WrapperContainer';
 import {FontFamily, images} from '../utils';
+import {useNavigation} from '@react-navigation/native';
+import NavigationStrings from '../Navigations/NavigationStrings';
 
 const ProductList = () => {
-  const [heart, setheart] = useState(false);
-  const [selectedHeading, setSelectedHeading] = useState(1);
-
   const storeData = [
     {
       id: 1,
@@ -27,7 +26,7 @@ const ProductList = () => {
       products: [
         {
           id: 11,
-          name: 'BlueBerry Blast',
+          name: 'BlueBerry Blasts',
           price: '$11.99',
           image: images.product,
         },
@@ -95,27 +94,28 @@ const ProductList = () => {
       ],
     },
   ];
+
   const flatListRef = useRef(null);
+  const [selectedHeading, setSelectedHeading] = useState(0);
+  const [heart, setheart] = useState(false);
+  const navigation = useNavigation();
   const handleHeadingPress = index => {
     setSelectedHeading(index);
+    scrollToView(index);
   };
 
-  const scrollViewRef = useRef(null);
-  const secondViewRef = useRef(null);
-  const scrollToView = ref => {
-    ref.current.measureLayout(
-      scrollViewRef.current,
-      (x, y) => {
-        scrollViewRef.current.scrollTo({y, animated: true});
-      },
-      () => console.error('Measurement failed'),
-    );
+  const scrollToView = index => {
+    flatListRef.current?.scrollToIndex({index, animated: true});
   };
 
   return (
-    <WrapperContainer>
+    <WrapperContainer style={{flex: 1}}>
       <View style={styles.container1}>
-        <TouchableOpacity style={{}}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+          style={{}}>
           <Image
             source={images.back}
             style={{
@@ -154,7 +154,11 @@ const ProductList = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{width: responsiveWidth(85), alignSelf: 'center'}}>
+      <View
+        style={{
+          width: responsiveWidth(85),
+          alignSelf: 'center',
+        }}>
         <View
           style={{
             flexDirection: 'row',
@@ -165,16 +169,16 @@ const ProductList = () => {
             resizeMode="fit"
             source={images.store}
             style={{
-              width: responsiveWidth(20),
-              height: responsiveWidth(20),
-              borderRadius: 13,
+              width: responsiveWidth(15),
+              height: responsiveWidth(15),
+              borderRadius: responsiveWidth(2),
             }}
           />
           <View style={{gap: responsiveHeight(1)}}>
             <Text
               style={{
                 fontFamily: FontFamily.Extra_Bold,
-                fontSize: responsiveFontSize(2.6),
+                fontSize: responsiveFontSize(2.2),
                 color: 'black',
               }}>
               Vape Heaven
@@ -189,7 +193,12 @@ const ProductList = () => {
                 source={images.location}
                 style={{width: responsiveWidth(3), height: responsiveWidth(4)}}
               />
-              <Text style={{fontSize: responsiveFontSize(2), color: '#989898'}}>
+              <Text
+                style={{
+                  fontSize: responsiveFontSize(1.5),
+                  color: '#989898',
+                  fontFamily: FontFamily.Medium,
+                }}>
                 123 Main Street, Cityville
               </Text>
             </View>
@@ -210,70 +219,100 @@ const ProductList = () => {
             }}>
             <Image
               source={images.star}
-              style={{height: responsiveWidth(5), width: responsiveWidth(5)}}
+              style={{
+                height: responsiveWidth(4),
+                width: responsiveWidth(4),
+                tintColor: '#5C76F0',
+              }}
             />
             <Text
               style={{
                 fontFamily: FontFamily.Bold,
                 color: 'black',
-                fontSize: responsiveFontSize(2),
+                fontSize: responsiveFontSize(1.8),
               }}>
               4.7
             </Text>
-            <Text style={{fontSize: responsiveFontSize(2), color: '#989898'}}>
+            <Text
+              style={{
+                fontSize: responsiveFontSize(1.5),
+                color: '#989898',
+                fontFamily: FontFamily.Regular,
+              }}>
               200+ ratings
             </Text>
           </View>
-          <Text
-            style={{
-              color: '#4361EE',
-              fontSize: responsiveFontSize(1.8),
-              fontFamily: FontFamily.Medium,
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => {
+              navigation.navigate(NavigationStrings.REVIEW);
             }}>
-            See reviews
-          </Text>
+            <Text
+              style={{
+                color: '#4361EE',
+                fontSize: responsiveFontSize(1.8),
+                fontFamily: FontFamily.Medium,
+              }}>
+              See reviews
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View
         style={{
-          height: responsiveHeight(7),
-          borderTopWidth: 1.5,
-          borderBottomWidth: 1.5,
+          borderTopWidth: responsiveHeight(0.2),
+          borderBottomWidth: responsiveHeight(0.2),
           borderColor: '#F0F0F0',
         }}>
         <FlatList
-          data={storeData}
+          data={[
+            'E-Liquid & Juice',
+            'Mods & Tanks',
+            'Pod Systems',
+            'Accessories',
+            'Nicotine Salts',
+          ]}
           horizontal
           showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              onPress={() => {
-                handleHeadingPress(item.id);
-                scrollToView(secondViewRef);
-              }}
-              style={{
-                marginHorizontal: responsiveWidth(3),
-                marginVertical: responsiveHeight(2.5),
-              }}>
-              <Text
+          renderItem={({item, index}) => {
+            return (
+              <TouchableOpacity
+                touchSoundDisabled
+                onPress={() => {
+                  handleHeadingPress(index);
+                }}
                 style={{
-                  fontFamily: FontFamily.Bold,
-                  color: item.id === selectedHeading ? '#4361EE' : 'black',
+                  marginHorizontal: responsiveWidth(3.5),
+                  borderBottomWidth:
+                    index === selectedHeading
+                      ? responsiveHeight(0.3)
+                      : responsiveHeight(0.2),
+                  paddingVertical: responsiveHeight(2),
+                  borderColor: index === selectedHeading ? '#4361EE' : '#fff',
                 }}>
-                {item.category}
-              </Text>
-            </TouchableOpacity>
-          )}
+                <Text
+                  style={{
+                    fontSize: responsiveFontSize(1.8),
+                    fontFamily: FontFamily.Bold,
+                    color: index === selectedHeading ? '#4361EE' : 'black',
+                  }}>
+                  {item}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
         />
       </View>
-      <ScrollView
-        ref={scrollViewRef}
-        showsVerticalScrollIndicator={false}
-        style={{backgroundColor: '#F5F5F5'}}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#F0F0F0',
+          marginTop: responsiveHeight(2),
+        }}>
         <FlatList
-          data={storeData}
           ref={flatListRef}
+          data={storeData}
+          showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
             <View
               key={item.id}
@@ -291,78 +330,83 @@ const ProductList = () => {
                 }}>
                 {item.category}
               </Text>
-              <View style={{flex: 1}}>
-                <FlatList
-                  data={item.products}
-                  renderItem={({item}) => (
-                    <View key={item.id} style={[styles.product]}>
-                      <Image
-                        source={item.image}
-                        style={{
-                          width: responsiveWidth(40),
-                          height: responsiveWidth(40),
-                          backgroundColor: 'white',
-                          borderRadius: 10,
-                        }}
-                      />
+
+              <FlatList
+                numColumns={2}
+                columnWrapperStyle={{
+                  justifyContent: 'space-between',
+                  marginBottom: responsiveHeight(2),
+                }}
+                data={item.products}
+                renderItem={({item}) => (
+                  <TouchableOpacity
+                    activeOpacity={0.9}
+                    key={item.id}
+                    style={{gap: responsiveHeight(1)}}>
+                    <Image
+                      source={item.image}
+                      style={{
+                        width: responsiveWidth(35),
+                        height: responsiveWidth(35),
+                        backgroundColor: 'white',
+                        borderRadius: responsiveWidth(3),
+                      }}
+                    />
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        width: responsiveWidth(35),
+                      }}>
+                      <View style={{gap: responsiveHeight(1), flex: 1}}>
+                        <Text
+                          numberOfLines={1}
+                          style={{
+                            fontFamily: FontFamily.Semi_Bold,
+                            color: 'black',
+                            fontSize: responsiveFontSize(1.6),
+                          }}>
+                          {item.name}
+                        </Text>
+                        <Text
+                          style={{
+                            fontFamily: FontFamily.Bold,
+                            fontSize: responsiveFontSize(1.8),
+                            color: '#4361EE',
+                          }}>
+                          $12.67
+                        </Text>
+                      </View>
                       <View
                         style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
+                          justifyContent: 'center',
+                          alignItems: 'center',
                         }}>
-                        <View>
-                          <Text
-                            numberOfLines={1}
-                            style={{
-                              fontFamily: FontFamily.Semi_Bold,
-                              color: 'black',
-                              fontSize: responsiveFontSize(2),
-                              width: responsiveWidth(33),
-                            }}>
-                            {item.name}
-                          </Text>
-                          <Text
-                            style={{
-                              fontFamily: FontFamily.Bold,
-                              fontSize: responsiveFontSize(2),
-                              color: '#4361EE',
-                            }}>
-                            $12.67
-                          </Text>
-                        </View>
-                        <View
-                          ref={secondViewRef}
+                        <TouchableOpacity
+                          activeOpacity={0.9}
                           style={{
-                            justifyContent: 'center',
-                            alignItems: 'center',
+                            borderRadius: responsiveWidth(30),
+                            backgroundColor: '#4361EE',
+                            padding: 5,
                           }}>
-                          <TouchableOpacity
-                            onPress={() => scrollToView(scrollViewRef)}
+                          <Image
+                            source={images.plus_slim}
                             style={{
-                              borderRadius: 40,
-                              backgroundColor: '#4361EE',
-                              padding: 5,
-                            }}>
-                            <Image
-                              source={images.plus_slim}
-                              style={{
-                                width: responsiveWidth(3.5),
-                                height: responsiveWidth(3.5),
-                              }}
-                            />
-                          </TouchableOpacity>
-                        </View>
+                              width: responsiveWidth(3.5),
+                              height: responsiveWidth(3.5),
+                            }}
+                          />
+                        </TouchableOpacity>
                       </View>
                     </View>
-                  )}
-                  numColumns={2}
-                  contentContainerStyle={styles.container}
-                />
-              </View>
+                  </TouchableOpacity>
+                )}
+              />
             </View>
           )}
         />
-      </ScrollView>
+      </View>
     </WrapperContainer>
   );
 };
@@ -373,17 +417,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignSelf: 'center',
-    // alignItems: "center",
-  },
-  product: {
-    margin: responsiveWidth(1), // Adjust spacing between products
-    marginVertical: responsiveHeight(1),
-    width: responsiveWidth(40), // Adjust according to your need
   },
 });
 

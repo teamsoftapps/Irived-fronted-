@@ -10,4 +10,7 @@ export default {
   Cart: 'Cart',
   NOTIFICATION: 'Notification',
   Filter: 'Filter',
+  FAVOURITES: 'Favourite',
+  PRODUCTS_LIST: 'ProductList',
+  REVIEW: 'Review',
 };
