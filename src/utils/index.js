@@ -56,7 +56,7 @@ export const images = {
 
 export const colors = {
   primary: '#715CE4',
-  secondary: '#98FF98',
+  secondary: '#4361EE',
   BtnGreen: '#98FF98',
 };
 

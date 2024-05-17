@@ -8,6 +8,7 @@ import {name as appName} from './app.json';
 import {Provider} from 'react-redux';
 import {Store, persistor} from './src/Store/store';
 import Favourites from './src/Screens/Favourites';
+import Filter from './src/Screens/Filter';
 
 const Routes = () => {
   return (

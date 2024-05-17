@@ -4,6 +4,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BottomStack from './BottomStack';
 import NavigationStrings from './NavigationStrings';
 import Notification from '../Screens/Notification';
+import Favourites from '../Screens/Favourites';
+import ProductList from '../Screens/ProductList';
+import Review from '../Screens/Review';
+import Filter from '../Screens/Filter';
 
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
@@ -17,6 +21,18 @@ const MainStack = () => {
         name={NavigationStrings.NOTIFICATION}
         component={Notification}
       />
+      <Stack.Screen
+        name={NavigationStrings.FAVOURITES}
+        component={Favourites}
+      />
+      <Stack.Screen
+        name={NavigationStrings.PRODUCTS_LIST}
+        component={ProductList}
+      />
+      <Stack.Screen name={NavigationStrings.REVIEW} component={Review} />
+      <Stack.Screen
+        component={Filter}
+        name={NavigationStrings.Filter}></Stack.Screen>
     </Stack.Navigator>
   );
 };

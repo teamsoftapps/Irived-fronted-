@@ -6,6 +6,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {images} from '../../utils';
+// import {useNavigation} from '@react-navigation/native';
 
 const HeaderComponent = ({
   top_text = '',
@@ -15,16 +16,21 @@ const HeaderComponent = ({
   top_text_style = {},
   bottom_text_style = {},
   icon = 'back',
+  img_styles = {},
 }) => {
+  // const navigation = useNavigation();
   return (
     <View style={{...styles.container, ...style}}>
-      <TouchableOpacity style={{}}>
+      <TouchableOpacity
+        // onPress={() => navigation.goBack()}
+        style={{}}>
         <Image
           source={images[icon]}
           style={{
             width: responsiveWidth(6),
             height: responsiveHeight(4),
             resizeMode: 'contain',
+            ...img_styles,
           }}
         />
       </TouchableOpacity>
@@ -36,13 +42,16 @@ const HeaderComponent = ({
           }}>
           {top_text}
         </Text>
-        <Text
-          style={{
-            ...styles.bottom_text_style,
-            ...bottom_text_style,
-          }}>
-          {bottom_text}
-        </Text>
+
+        {bottom_text && (
+          <Text
+            style={{
+              ...styles.bottom_text_style,
+              ...bottom_text_style,
+            }}>
+            {bottom_text}
+          </Text>
+        )}
       </View>
     </View>
   );
