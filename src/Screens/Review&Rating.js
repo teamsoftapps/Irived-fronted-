@@ -130,6 +130,7 @@ const Orders = () => {
                     <FlatList
                         data={reviews_progress}
                         style={{}}
+                        showsVerticalScrollIndicator={false}
                         keyExtractor={item => item.id.toString()}
                         renderItem={({ item }) => (
                             <View style={styles.progress}>
