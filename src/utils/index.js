@@ -48,6 +48,9 @@ export const images = {
   profile: require('../assets/images/profile.png'),
   vapshop: require('../assets/images/vapshop.jpg'),
   vapshop1: require('../assets/images/vapshop1.jpg'),
+  offer_image: require('../assets/images/discount-img.png'),
+  star: require('../assets/images/sitara.png'),
+  nav: require('../assets/images/nav.png'),
 };
 
 export const colors = {
