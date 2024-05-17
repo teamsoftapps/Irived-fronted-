@@ -9,4 +9,5 @@ export default {
   PROFILE: 'PROFILE',
   Cart: 'Cart',
   NOTIFICATION: 'Notification',
+  Filter: 'Filter',
 };

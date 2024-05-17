@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BottomStack from './BottomStack';
 import NavigationStrings from './NavigationStrings';
 import Notification from '../Screens/Notification';
+import Filter from '../Screens/Filter';
 
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
@@ -17,6 +18,9 @@ const MainStack = () => {
         name={NavigationStrings.NOTIFICATION}
         component={Notification}
       />
+      <Stack.Screen
+        component={Filter}
+        name={NavigationStrings.Filter}></Stack.Screen>
     </Stack.Navigator>
   );
 };
