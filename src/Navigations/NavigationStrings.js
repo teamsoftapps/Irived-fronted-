@@ -9,4 +9,7 @@ export default {
   PROFILE: 'PROFILE',
   Cart: 'Cart',
   NOTIFICATION: 'Notification',
+  FAVOURITES: 'Favourite',
+  PRODUCTS_LIST: 'ProductList',
+  REVIEW: 'Review',
 };

@@ -16,9 +16,11 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { images } from '../utils';
+import {images} from '../utils';
 import WrapperContainer from '../Components/WrapperContainer';
 import ButtonComp from '../Components/ButtonComp';
+import {useNavigation} from '@react-navigation/native';
+import NavigationStrings from '../Navigations/NavigationStrings';
 
 const Profile_settings = [
   {
@@ -48,51 +50,50 @@ const Profile_settings = [
   },
 ];
 
-const renderItem = ({ item }) => {
-  return (
-    <TouchableOpacity
-      style={styles.option_container}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+const Profile = () => {
+  const navigation = useNavigation();
+  const renderItem = ({item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          item.id === 3
+            ? navigation.navigate(NavigationStrings.FAVOURITES)
+            : null;
+        }}
+        style={styles.option_container}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image
+            source={item.icon}
+            style={{
+              height: responsiveHeight(5),
+              width: responsiveHeight(5),
+            }}
+          />
+          <Text style={styles.option_text}>{item.name}</Text>
+        </View>
         <Image
-          source={item.icon}
+          source={images.arrow}
           style={{
-            height: responsiveHeight(5),
-            width: responsiveHeight(5),
+            width: responsiveWidth(3),
+            height: responsiveHeight(2),
+            resizeMode: 'contain',
           }}
         />
-        <Text
-          style={styles.option_text}>
-          {item.name}
-        </Text>
-      </View>
-      <Image
-        source={images.arrow}
-        style={{
-          width: responsiveWidth(3),
-          height: responsiveHeight(2),
-          resizeMode: 'contain',
-        }}
-      />
-    </TouchableOpacity>
-  );
-};
-
-const Profile = () => {
+      </TouchableOpacity>
+    );
+  };
   return (
-    <WrapperContainer style={{ alignItems: 'center' }}>
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flexGrow: 1 }}>
+    <WrapperContainer style={{alignItems: 'center'}}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{flexGrow: 1}}>
         <View
           style={{
             gap: responsiveScreenHeight(15),
             marginTop: responsiveHeight(5),
           }}>
           <View>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={styles.top}>
-                <Image
-                  source={images.Profile}
-                  style={styles.profile_image}
-                />
+                <Image source={images.Profile} style={styles.profile_image} />
                 <TouchableOpacity style={styles.editImage}>
                   <Image
                     source={images.editpro}
@@ -112,7 +113,8 @@ const Profile = () => {
               <TextInput
                 placeholder="Search Settings"
                 style={{
-                  flex: 1, fontSize: responsiveFontSize(1.6)
+                  flex: 1,
+                  fontSize: responsiveFontSize(1.6),
                 }}
               />
               <TouchableOpacity>
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: responsiveHeight(4),
   },
-  main: { justifyContent: 'space-between' },
+  main: {justifyContent: 'space-between'},
   pressable: {
     backgroundColor: '#4361EE',
     width: responsiveScreenWidth(80),

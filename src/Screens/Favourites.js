@@ -2,6 +2,7 @@ import {
   FlatList,
   Image,
   ImageBackground,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,19 +17,28 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {useNavigation} from '@react-navigation/native';
 
 const Favourites = () => {
   const Shops = [
     {
       shopimg: images.vapshop,
-      title: 'Vape Haven',
+      title: 'Classic City Vapes',
+      locationimg: images.location,
+      location: '456 Oak Avenue,Metroville',
+      fav: images.fav_selected,
+      notfav: images.fav_unselected,
+    },
+    {
+      shopimg: images.vapshop1,
+      title: 'Vapor Emporium',
       locationimg: images.location,
       location: '123 Main Street, Cityville',
       fav: images.fav_selected,
       notfav: images.fav_unselected,
     },
     {
-      shopimg: images.vapshop,
+      shopimg: images.store,
       title: 'Vape Haven',
       locationimg: images.location,
       location: '123 Main Street, Cityville',
@@ -37,8 +47,10 @@ const Favourites = () => {
     },
   ];
   const [select, setselect] = useState(false);
+
+  const navigattion = useNavigation();
   return (
-    <WrapperContainer>
+    <WrapperContainer style={{flex: 1}}>
       <View
         style={{
           flexDirection: 'row',
@@ -47,14 +59,19 @@ const Favourites = () => {
           paddingHorizontal: responsiveWidth(6),
           height: responsiveHeight(10),
         }}>
-        <Image
-          resizeMode="contain"
-          style={{
-            width: responsiveWidth(5),
-            height: responsiveHeight(4),
-          }}
-          source={images.back}
-        />
+        <TouchableOpacity
+          onPress={() => {
+            navigattion.goBack();
+          }}>
+          <Image
+            resizeMode="contain"
+            style={{
+              width: responsiveWidth(5),
+              height: responsiveHeight(4),
+            }}
+            source={images.back}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             fontSize: responsiveFontSize(2.5),
@@ -106,22 +123,63 @@ const Favourites = () => {
           <Text style={styles.subhead}>Products</Text>
         </TouchableOpacity>
       </View>
-      <View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
         <FlatList
+          scrollEnabled={false}
+          style={{
+            marginTop: responsiveHeight(4),
+            paddingHorizontal: responsiveWidth(6),
+            flex: 1,
+          }}
           data={Shops}
           renderItem={({item, index}) => {
             return (
-              <ImageBackground
-                source={item.shopimg}
-                style={{
-                  width: responsiveWidth(80),
-                  alignSelf: 'center',
-                  height: responsiveHeight(40),
-                }}></ImageBackground>
+              <TouchableOpacity
+                style={{position: 'relative'}}
+                activeOpacity={0.95}>
+                <Image source={item.shopimg} style={styles.shopImg} />
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: responsiveHeight(4),
+                    paddingHorizontal: responsiveWidth(4),
+                  }}>
+                  <Text numberOfLines={1} style={styles.shoptitle}>
+                    {item.title}
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: responsiveWidth(1),
+                      marginTop: responsiveHeight(1),
+                    }}>
+                    <Image
+                      source={item.locationimg}
+                      style={{
+                        width: responsiveWidth(3.5),
+                        height: responsiveWidth(3.5),
+                        resizeMode: 'contain',
+                        tintColor: '#fff',
+                      }}
+                    />
+                    <Text
+                      numberOfLines={1}
+                      style={{
+                        fontFamily: FontFamily.Regular,
+                        color: '#F5F5F5',
+                        fontSize: responsiveFontSize(1.4),
+                      }}>
+                      {item.location}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
             );
           }}
         />
-      </View>
+      </ScrollView>
     </WrapperContainer>
   );
 };
@@ -133,5 +191,17 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
     fontFamily: FontFamily.Bold,
     color: '#000',
+  },
+  shopImg: {
+    width: '100%',
+    height: responsiveWidth(55),
+    borderRadius: responsiveWidth(3),
+    marginVertical: responsiveHeight(1),
+    alignSelf: 'center',
+  },
+  shoptitle: {
+    fontSize: responsiveFontSize(2),
+    color: '#fff',
+    fontFamily: FontFamily.Semi_Bold,
   },
 });

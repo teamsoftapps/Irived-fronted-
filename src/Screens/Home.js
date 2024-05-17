@@ -7,6 +7,7 @@ import {
   FlatList,
   SafeAreaView,
   ScrollView,
+  ImageBackground,
 } from 'react-native';
 import React, {useState} from 'react';
 import WrapperContainer from '../Components/WrapperContainer';
@@ -27,11 +28,41 @@ const Categories = [
   {name: 'Accessories', id: 4},
   {name: 'Nicotine Salts', id: 5},
 ];
+const Shops = [
+  {
+    shopimg: images.vapshop,
+    title: 'Classic City Vapes',
+    locationimg: images.location,
+    location: '456 Oak Avenue,Metroville',
+    fav: images.fav_selected,
+    notfav: images.fav_unselected,
+  },
+  {
+    shopimg: images.vapshop1,
+    title: 'Vapor Emporium',
+    locationimg: images.location,
+    location: '123 Main Street, Cityville',
+    fav: images.fav_selected,
+    notfav: images.fav_unselected,
+  },
+  {
+    shopimg: images.store,
+    title: 'Vape Haven',
+    locationimg: images.location,
+    location: '123 Main Street, Cityville',
+    fav: images.fav_selected,
+    notfav: images.fav_unselected,
+  },
+];
 const Home = () => {
   const navigation = useNavigation();
   const [active, setactive] = useState(0);
   return (
-    <WrapperContainer style={{flex: 1, paddingHorizontal: responsiveWidth(6)}}>
+    <WrapperContainer
+      style={{
+        flex: 1,
+        paddingHorizontal: responsiveWidth(6),
+      }}>
       <View
         style={{
           flexDirection: 'row',
@@ -109,9 +140,8 @@ const Home = () => {
           data={Categories}
           horizontal
           showsHorizontalScrollIndicator={false}
+          contentInsetAdjustmentBehavior="automatic"
           contentContainerStyle={{
-            height: 55,
-            flexDirection: 'row',
             marginTop: responsiveHeight(2),
           }}
           renderItem={({item}) => (
@@ -122,8 +152,16 @@ const Home = () => {
               <Text
                 style={
                   active === item.id
-                    ? {color: 'white', fontFamily: FontFamily.Bold}
-                    : {color: 'black', fontFamily: FontFamily.Bold}
+                    ? {
+                        color: 'white',
+                        fontFamily: FontFamily.Bold,
+                        fontSize: responsiveFontSize(1.6),
+                      }
+                    : {
+                        color: 'black',
+                        fontFamily: FontFamily.Bold,
+                        fontSize: responsiveFontSize(1.6),
+                      }
                 }>
                 {item.name}
               </Text>
@@ -135,7 +173,6 @@ const Home = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
-            width: responsiveWidth(88),
             justifyContent: 'space-between',
             alignItems: 'center',
             flexDirection: 'row',
@@ -158,17 +195,15 @@ const Home = () => {
         <Image
           source={images.offer_image}
           style={{
-            width: responsiveWidth(90),
-            height: responsiveHeight(20),
-            borderRadius: 25,
+            width: '100%',
+            height: responsiveWidth(45),
+            borderRadius: responsiveWidth(5),
             marginVertical: responsiveHeight(3),
             alignSelf: 'center',
           }}
-          resizeMethod="cover"
         />
         <View
           style={{
-            width: responsiveWidth(88),
             justifyContent: 'space-between',
             alignItems: 'center',
             flexDirection: 'row',
@@ -180,7 +215,7 @@ const Home = () => {
               fontFamily: FontFamily.Bold,
               fontSize: responsiveFontSize(2.5),
             }}>
-            Shop
+            Shops
           </Text>
           <TouchableOpacity>
             <Text style={{color: '#5C76F0', fontFamily: FontFamily.Semi_Bold}}>
@@ -188,300 +223,59 @@ const Home = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{position: 'relative'}}>
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 2,
-              paddingHorizontal: responsiveHeight(1.6),
-              paddingVertical: responsiveWidth(1.2),
-              borderRadius: 10,
-              backgroundColor: '#4361EE',
-              flexDirection: 'row',
-              top: 45,
-              right: 23,
-              alignItems: 'center',
-              gap: responsiveWidth(2),
-            }}>
-            <Image
-              source={images.nav}
-              style={{width: responsiveWidth(4), height: responsiveHeight(2)}}
-            />
-            <Text
-              style={{
-                zIndex: 3,
-                color: 'white',
-                fontFamily: FontFamily.Medium,
-              }}>
-              140 m
-            </Text>
-          </View>
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 2,
-              paddingHorizontal: responsiveHeight(1.6),
-              paddingVertical: responsiveWidth(1.2),
-              borderRadius: 10,
-              backgroundColor: '#4361EE',
-              flexDirection: 'row',
-              bottom: 45,
-              right: 23,
-              alignItems: 'center',
-              gap: responsiveWidth(2),
-            }}>
-            <Image
-              source={images.star}
-              style={{width: responsiveWidth(4), height: responsiveHeight(2)}}
-            />
-            <Text
-              style={{
-                zIndex: 3,
-                color: 'white',
-                fontFamily: FontFamily.Medium,
-              }}>
-              4.7
-            </Text>
-          </View>
-          <View
-            style={{
-              position: 'absolute',
-              bottom: 45,
-              flexDirection: 'row',
-              left: 23,
-              zIndex: 3,
-              gap: 4,
-            }}>
-            <Image source={images.location} tintColor={'white'} />
-            <Text
-              style={{
-                fontSize: responsiveFontSize(1.5),
-                color: 'white',
-                fontFamily: FontFamily.Bold,
-              }}>
-              123, Main Street, CityVille
-            </Text>
-          </View>
-          <Text
-            style={{
-              position: 'absolute',
-              bottom: 70,
-              fontSize: responsiveFontSize(2),
-              left: 23,
-              zIndex: 3,
-              color: 'white',
-              fontFamily: FontFamily.Bold,
-            }}>
-            Vape Heaven
-          </Text>
-          <Image
-            source={images.store}
-            style={{
-              width: responsiveWidth(90),
-              height: responsiveHeight(25),
-              borderRadius: 25,
-              marginVertical: responsiveHeight(3),
-              alignSelf: 'center',
-            }}
-            resizeMethod="cover"
-          />
-        </View>
-        <View style={{position: 'relative'}}>
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 2,
-              paddingHorizontal: responsiveHeight(1.6),
-              paddingVertical: responsiveWidth(1.2),
-              borderRadius: 10,
-              backgroundColor: '#4361EE',
-              flexDirection: 'row',
-              top: 45,
-              right: 23,
-              alignItems: 'center',
-              gap: responsiveWidth(2),
-            }}>
-            <Image
-              source={images.nav}
-              style={{width: responsiveWidth(4), height: responsiveHeight(2)}}
-            />
-            <Text
-              style={{
-                zIndex: 3,
-                color: 'white',
-                fontFamily: FontFamily.Medium,
-              }}>
-              140 m
-            </Text>
-          </View>
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 2,
-              paddingHorizontal: responsiveHeight(1.6),
-              paddingVertical: responsiveWidth(1.2),
-              borderRadius: 10,
-              backgroundColor: '#4361EE',
-              flexDirection: 'row',
-              bottom: 45,
-              right: 23,
-              alignItems: 'center',
-              gap: responsiveWidth(2),
-            }}>
-            <Image
-              source={images.star}
-              style={{width: responsiveWidth(4), height: responsiveHeight(2)}}
-            />
-            <Text
-              style={{
-                zIndex: 3,
-                color: 'white',
-                fontFamily: FontFamily.Medium,
-              }}>
-              4.7
-            </Text>
-          </View>
-          <View
-            style={{
-              position: 'absolute',
-              bottom: 45,
-              flexDirection: 'row',
-              left: 23,
-              zIndex: 3,
-              gap: 4,
-            }}>
-            <Image source={images.location} tintColor={'white'} />
-            <Text
-              style={{
-                fontSize: responsiveFontSize(1.5),
-                color: 'white',
-                fontFamily: FontFamily.Bold,
-              }}>
-              123, Main Street, CityVille
-            </Text>
-          </View>
-          <Text
-            style={{
-              position: 'absolute',
-              bottom: 70,
-              fontSize: responsiveFontSize(2),
-              left: 23,
-              zIndex: 3,
-              color: 'white',
-              fontFamily: FontFamily.Bold,
-            }}>
-            Vape Heaven
-          </Text>
-          <Image
-            source={images.vapshop}
-            style={{
-              width: responsiveWidth(90),
-              height: responsiveHeight(25),
-              borderRadius: 25,
-              marginVertical: responsiveHeight(3),
-              alignSelf: 'center',
-            }}
-            resizeMethod="cover"
-          />
-        </View>
-        <View style={{position: 'relative'}}>
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 2,
-              paddingHorizontal: responsiveHeight(1.6),
-              paddingVertical: responsiveWidth(1.2),
-              borderRadius: 10,
-              backgroundColor: '#4361EE',
-              flexDirection: 'row',
-              top: 45,
-              right: 23,
-              alignItems: 'center',
-              gap: responsiveWidth(2),
-            }}>
-            <Image
-              source={images.nav}
-              style={{width: responsiveWidth(4), height: responsiveHeight(2)}}
-            />
-            <Text
-              style={{
-                zIndex: 3,
-                color: 'white',
-                fontFamily: FontFamily.Medium,
-              }}>
-              140 m
-            </Text>
-          </View>
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 2,
-              paddingHorizontal: responsiveHeight(1.6),
-              paddingVertical: responsiveWidth(1.2),
-              borderRadius: 10,
-              backgroundColor: '#4361EE',
-              flexDirection: 'row',
-              bottom: 45,
-              right: 23,
-              alignItems: 'center',
-              gap: responsiveWidth(2),
-            }}>
-            <Image
-              source={images.star}
-              style={{width: responsiveWidth(4), height: responsiveHeight(2)}}
-            />
-            <Text
-              style={{
-                zIndex: 3,
-                color: 'white',
-                fontFamily: FontFamily.Medium,
-              }}>
-              4.7
-            </Text>
-          </View>
-          <View
-            style={{
-              position: 'absolute',
-              bottom: 45,
-              flexDirection: 'row',
-              left: 23,
-              zIndex: 3,
-              gap: 4,
-            }}>
-            <Image source={images.location} tintColor={'white'} />
-            <Text
-              style={{
-                fontSize: responsiveFontSize(1.5),
-                color: 'white',
-                fontFamily: FontFamily.Bold,
-              }}>
-              123, Main Street, CityVille
-            </Text>
-          </View>
-          <Text
-            style={{
-              position: 'absolute',
-              bottom: 70,
-              fontSize: responsiveFontSize(2),
-              left: 23,
-              zIndex: 3,
-              color: 'white',
-              fontFamily: FontFamily.Bold,
-            }}>
-            Vape Heaven
-          </Text>
-          <Image
-            source={images.vapshop1}
-            style={{
-              width: responsiveWidth(90),
-              height: responsiveHeight(25),
-              borderRadius: 25,
-              marginVertical: responsiveHeight(3),
-              alignSelf: 'center',
-            }}
-            resizeMethod="cover"
-          />
-        </View>
+
+        <FlatList
+          scrollEnabled={false}
+          data={Shops}
+          renderItem={({item, index}) => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(NavigationStrings.PRODUCTS_LIST);
+                }}
+                style={{position: 'relative'}}
+                activeOpacity={0.95}>
+                <Image source={item.shopimg} style={styles.shopImg} />
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: responsiveHeight(4),
+                    paddingHorizontal: responsiveWidth(4),
+                  }}>
+                  <Text numberOfLines={1} style={styles.shoptitle}>
+                    {item.title}
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: responsiveWidth(1),
+                      marginTop: responsiveHeight(1),
+                    }}>
+                    <Image
+                      source={item.locationimg}
+                      style={{
+                        width: responsiveWidth(3.5),
+                        height: responsiveWidth(3.5),
+                        resizeMode: 'contain',
+                        tintColor: '#fff',
+                      }}
+                    />
+                    <Text
+                      numberOfLines={1}
+                      style={{
+                        fontFamily: FontFamily.Regular,
+                        color: '#F5F5F5',
+                        fontSize: responsiveFontSize(1.4),
+                      }}>
+                      {item.location}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
       </ScrollView>
     </WrapperContainer>
   );
@@ -510,22 +304,34 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   tag: {
-    padding: 13,
+    padding: responsiveWidth(3),
+    paddingHorizontal: responsiveWidth(4),
     borderWidth: 1,
-    borderColor: 'gray',
-    paddingHorizontal: 18,
-    borderRadius: 30,
-    marginHorizontal: 6,
-    marginVertical: 4,
+    borderColor: '#E6E6E6',
+    borderRadius: responsiveWidth(6),
+    marginHorizontal: responsiveWidth(1.5),
+    marginVertical: responsiveHeight(1),
   },
   active: {
-    padding: 13,
-    borderWidth: 0.5,
-    borderColor: 'gray',
-    paddingHorizontal: 18,
-    borderRadius: 30,
-    marginHorizontal: 2.5,
-    marginVertical: 4,
+    padding: responsiveWidth(3),
+    borderWidth: 1,
+    borderColor: '#E6E6E6',
+    paddingHorizontal: responsiveWidth(4),
+    borderRadius: responsiveWidth(6),
+    marginHorizontal: responsiveWidth(1.5),
+    marginVertical: responsiveHeight(1),
     backgroundColor: '#4361EE',
+  },
+  shopImg: {
+    width: '100%',
+    height: responsiveWidth(55),
+    borderRadius: responsiveWidth(3),
+    marginVertical: responsiveHeight(2),
+    alignSelf: 'center',
+  },
+  shoptitle: {
+    fontSize: responsiveFontSize(2),
+    color: '#fff',
+    fontFamily: FontFamily.Semi_Bold,
   },
 });
