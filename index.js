@@ -9,6 +9,7 @@ import {Provider} from 'react-redux';
 import {Store, persistor} from './src/Store/store';
 import Favourites from './src/Screens/Favourites';
 import Filter from './src/Screens/Filter';
+import PersonalInfo from './src/Screens/PersonalInfo';
 
 const Routes = () => {
   return (
@@ -17,4 +18,4 @@ const Routes = () => {
     </Provider>
   );
 };
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => PersonalInfo);
