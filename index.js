@@ -10,6 +10,7 @@ import {Store, persistor} from './src/Store/store';
 import Favourites from './src/Screens/Favourites';
 import Filter from './src/Screens/Filter';
 import PersonalInfo from './src/Screens/PersonalInfo';
+import Extra from './src/Screens/Extra';
 
 const Routes = () => {
   return (
@@ -18,4 +19,4 @@ const Routes = () => {
     </Provider>
   );
 };
-AppRegistry.registerComponent(appName, () => PersonalInfo);
+AppRegistry.registerComponent(appName, () => Extra);
