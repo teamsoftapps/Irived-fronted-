@@ -83,7 +83,7 @@ const Extra = () => {
           </View>
         </View>
       </ModalComponent> */}
-      <ModalComponent>
+      {/* <ModalComponent>
         <View
           style={{
             backgroundColor: '#fff',
@@ -122,8 +122,12 @@ const Extra = () => {
               flex: 1,
             }}>
             <Image
-              style={{width: responsiveWidth(25), height: responsiveWidth(25)}}
-              source={images.scooter}
+              style={{
+                width: responsiveWidth(28),
+                height: responsiveWidth(28),
+                resizeMode: 'contain',
+              }}
+              source={images.Scooterr}
             />
             <Text
               style={{
@@ -146,7 +150,7 @@ const Extra = () => {
             </Text>
           </View>
         </View>
-      </ModalComponent>
+      </ModalComponent> */}
     </View>
   );
 };

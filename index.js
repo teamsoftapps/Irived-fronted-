@@ -11,6 +11,8 @@ import Favourites from './src/Screens/Favourites';
 import Filter from './src/Screens/Filter';
 import PersonalInfo from './src/Screens/PersonalInfo';
 import Extra from './src/Screens/Extra';
+import Order from './src/Screens/Orders';
+import Orders from './src/Screens/Review&Rating';
 
 const Routes = () => {
   return (
@@ -19,4 +21,5 @@ const Routes = () => {
     </Provider>
   );
 };
-AppRegistry.registerComponent(appName, () => Extra);
+
+AppRegistry.registerComponent(appName, () => Order);
