@@ -5,13 +5,17 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthStack from './src/Navigations/AuthStack';
 import MainStack from './src/Navigations/MainStack';
 import {NavigationContainer} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import authSlice from './src/Store/Slices/authSlice';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
-  const [state, setstate] = useState(true);
+  const isAuth = useSelector(state => state.auth?.isAuthenticated);
+  console.log(isAuth, ' auth');
+  const [state, setstate] = useState();
   return (
     <NavigationContainer>
-      {!state ? <AuthStack /> : <MainStack />}
+      {true ? <AuthStack /> : <MainStack />}
     </NavigationContainer>
   );
 };

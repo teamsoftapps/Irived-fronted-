@@ -32,14 +32,21 @@ const Signup = () => {
   const [error, setError] = useState('');
   const [loading, setIsLoading] = useState(false);
   const handleSignup = async body => {
+    console.log(body);
     try {
       console.log(body, 'body');
+      if (!(body.email && body.name && body.password)) {
+        console.log('Oops make sure to fill data correctly!'); // THAT WILL BE DISPLAYED IN TOAST MESSAGE
+        return;
+      }
       setIsLoading(true);
-      // const res = await apiRequest('/auth/signup', );
+      const res = await apiRequest.post('/auth/signup', body);
       console.log(res);
       setIsLoading(false);
+      console.log(res?.data?.message); // that will be displayed in toast message
     } catch (e) {
       console.log(e, 'Signup Error');
+      console.log(e?.response?.data?.error, 'dd');
       setIsLoading(false);
     }
   };
@@ -147,9 +154,17 @@ const Signup = () => {
                     </View> */}
                   </View>
                   <ButtonComp
-                    onPress={() => {
-                      // navigation.replace(NavigationStrings.SIGN_UP);
-                    }}
+                    onPress={() =>
+                      handleSignup({
+                        email: '123ibrahimmm7890@gmail.com',
+                        password: '21214646',
+                        name: 'ibrahimmm',
+                      })
+                    }
+                    // onPress={() => {
+
+                    //   // navigation.replace(NavigationStrings.SIGN_UP);
+                    // }}
                     text="Sign Up"
                   />
                   <Text
