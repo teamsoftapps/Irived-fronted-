@@ -18,20 +18,25 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import React, { useState } from 'react';
-import { FontFamily, images } from '../utils';
-import { BlurView } from '@react-native-community/blur';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, {useState} from 'react';
+import {FontFamily, images} from '../utils';
+import {BlurView} from '@react-native-community/blur';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import TinputWlabel from '../Components/TinputWlabel';
 import ButtonComp from '../Components/ButtonComp';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import NavigationStrings from '../Navigations/NavigationStrings';
+// import axios from 'axios';
+
+// const
 const Login = () => {
   const [isCheck, setisCheck] = useState(false);
   const [isVisible, setisVisible] = useState(true);
+  const [error, setError] = useState('');
+  const [loading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <ImageBackground
         resizeMode="cover"
         source={images.authBg}
@@ -40,7 +45,7 @@ const Login = () => {
 
         <KeyboardAvoidingView
           behavior={Platform.OS === 'android' ? 'padding' : 'height'}
-          style={{ flex: 1 }}>
+          style={{flex: 1}}>
           <TouchableWithoutFeedback
             onPress={() => {
               Keyboard.dismiss();
@@ -48,7 +53,6 @@ const Login = () => {
             <SafeAreaView style={styles.safearea}>
               <BlurView
                 style={{
-
                   width: responsiveWidth(90),
                   // height: responsiveHeight(70),
                   overflow: 'hidden',
@@ -67,7 +71,7 @@ const Login = () => {
                   </Text>
                   <Text style={styles.welcome}>Welcome Back!</Text>
                   <Text style={styles.signin}>Sign in to continue</Text>
-                  <View style={{ marginVertical: responsiveHeight(3) }}>
+                  <View style={{marginVertical: responsiveHeight(3)}}>
                     <TinputWlabel imagee={images.check} header="Email" />
                     <TinputWlabel
                       imageOnpress={() => {
@@ -76,7 +80,7 @@ const Login = () => {
                       imagee={isVisible ? images.showeye : images.hideeye}
                       secureTextEntry={isVisible}
                       header="Password"
-                      containerstyle={{ marginTop: responsiveHeight(2) }}
+                      containerstyle={{marginTop: responsiveHeight(2)}}
                     />
                     <View
                       style={{
