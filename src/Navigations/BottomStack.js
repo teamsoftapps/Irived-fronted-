@@ -6,7 +6,6 @@ import Orders from '../Screens/Orders';
 import Message from '../Screens/Message';
 import Profile from '../Screens/Profile';
 import NavigationStrings from './NavigationStrings';
-import Cart from '../Screens/Product';
 import {images} from '../utils';
 import {
   responsiveFontSize,
@@ -108,6 +107,7 @@ const BottomStack = () => {
               }}
             />
           ),
+          tabBarStyle: {display: 'none'},
         }}
       />
       <Bottom.Screen

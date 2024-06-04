@@ -18,7 +18,12 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import FavShop from './FavShop';
+import NavigationStrings from '../Navigations/NavigationStrings';
+import FavProducts from './FavProducts';
 
+const Tab = createMaterialTopTabNavigator();
 const Favourites = () => {
   const Shops = [
     {
@@ -49,6 +54,7 @@ const Favourites = () => {
   const [select, setselect] = useState(false);
 
   const navigattion = useNavigation();
+
   return (
     <WrapperContainer style={{flex: 1}}>
       <View
@@ -83,7 +89,7 @@ const Favourites = () => {
         </Text>
       </View>
 
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
@@ -122,64 +128,62 @@ const Favourites = () => {
           }}>
           <Text style={styles.subhead}>Products</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <FlatList
-          scrollEnabled={false}
-          style={{
-            marginTop: responsiveHeight(4),
-            paddingHorizontal: responsiveWidth(6),
-            flex: 1,
-          }}
-          data={Shops}
-          renderItem={({item, index}) => {
-            return (
-              <TouchableOpacity
-                style={{position: 'relative'}}
-                activeOpacity={0.95}>
-                <Image source={item.shopimg} style={styles.shopImg} />
-                <View
-                  style={{
-                    position: 'absolute',
-                    bottom: responsiveHeight(4),
-                    paddingHorizontal: responsiveWidth(4),
-                  }}>
-                  <Text numberOfLines={1} style={styles.shoptitle}>
-                    {item.title}
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      gap: responsiveWidth(1),
-                      marginTop: responsiveHeight(1),
-                    }}>
-                    <Image
-                      source={item.locationimg}
-                      style={{
-                        width: responsiveWidth(3.5),
-                        height: responsiveWidth(3.5),
-                        resizeMode: 'contain',
-                        tintColor: '#fff',
-                      }}
-                    />
-                    <Text
-                      numberOfLines={1}
-                      style={{
-                        fontFamily: FontFamily.Regular,
-                        color: '#F5F5F5',
-                        fontSize: responsiveFontSize(1.4),
-                      }}>
-                      {item.location}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
+      <Tab.Navigator
+        tabBar={({navigation, state}) => (
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              paddingHorizontal: responsiveWidth(6),
+              borderBottomWidth: responsiveHeight(0.05),
+              borderBottomColor: 'gray',
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                setselect(false);
+                navigation.navigate(NavigationStrings.FAV_SHOP);
+              }}
+              activeOpacity={0.8}
+              style={{
+                borderBottomWidth: responsiveHeight(0.4),
+                paddingBottom: responsiveHeight(0.5),
+                borderBottomColor:
+                  state.index === 0 ? '#4361EE' : 'transparent',
+                borderRadius: responsiveHeight(0.2),
+                width: responsiveWidth(18),
+                alignItems: 'center',
+              }}>
+              <Text style={styles.subhead}>Shops</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setselect(true);
+                navigation.navigate(NavigationStrings.FAV_PRODUCTS);
+              }}
+              activeOpacity={0.8}
+              style={{
+                borderBottomWidth: responsiveHeight(0.4),
+                paddingBottom: responsiveHeight(0.5),
+                borderBottomColor:
+                  state.index === 1 ? '#4361EE' : 'transparent',
+                borderRadius: responsiveHeight(0.2),
+                width: responsiveWidth(24),
+                alignItems: 'center',
+              }}>
+              <Text style={styles.subhead}>Products</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        screenOptions={{tabBarShowLabel: false}}>
+        <Tab.Screen name={NavigationStrings.FAV_SHOP} component={FavShop} />
+        <Tab.Screen
+          name={NavigationStrings.FAV_PRODUCTS}
+          component={FavProducts}
         />
-      </ScrollView>
+      </Tab.Navigator>
     </WrapperContainer>
   );
 };

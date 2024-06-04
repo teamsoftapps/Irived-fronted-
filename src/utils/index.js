@@ -55,6 +55,7 @@ export const images = {
   nav: require('../assets/images/nav.png'),
   bin_icon: require('../assets/images/bin-icon.png'),
   Scooterr: require('../assets/images/scooter2.png'),
+  heart1: require('../assets/images/heart1.png'),
 };
 
 export const colors = {

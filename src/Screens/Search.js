@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import WrapperContainer from '../Components/WrapperContainer';
 import {FontFamily, images} from '../utils';
 import {
@@ -15,6 +15,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {useNavigation} from '@react-navigation/native';
 const recent = [
   {name: 'E-liquids & Juices', id: 1},
   {name: 'Mods & Tanks', id: 2},
@@ -30,25 +31,52 @@ const popular = [
   {name: 'E-liquids & Juices', id: 6},
 ];
 const Search = () => {
+  const navigation = useNavigation();
+  const [blur, setblur] = useState(false);
   return (
     <WrapperContainer>
       <View style={styles.top}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
           <Image
             source={images.back}
-            style={{width: responsiveWidth(6), height: responsiveHeight(2.5)}}
+            style={{
+              width: responsiveWidth(6),
+              height: responsiveWidth(4),
+              resizeMode: 'contain',
+            }}
           />
         </TouchableOpacity>
-        <View style={styles.search}>
+        <View
+          style={[
+            styles.search,
+            {borderColor: blur ? 'transparent' : '#788DF3'},
+          ]}>
           <Image
             source={images.search}
             tintColor={'#788DF3'}
-            style={{marginHorizontal: 10}}
+            style={{
+              marginHorizontal: 10,
+              tintColor: blur ? 'gray' : '#788DF3',
+            }}
           />
           <TextInput
-            placeholder="Enter Something"
+            onBlur={() => {
+              setblur(true);
+            }}
+            onFocus={() => {
+              setblur(false);
+            }}
+            autoFocus={true}
+            placeholder="Search"
             numberOfLines={1}
-            style={{width: responsiveWidth(64), height: responsiveHeight(6)}}
+            style={{
+              width: responsiveWidth(64),
+              height: responsiveHeight(6),
+              fontFamily: FontFamily.Medium,
+            }}
             placeholderTextColor={'black'}
           />
         </View>
@@ -56,32 +84,32 @@ const Search = () => {
       <View style={{width: responsiveWidth(85), alignSelf: 'center'}}>
         <Text style={styles.heading}>Recent Searches</Text>
         <FlatList
+          numColumns={2}
           data={recent}
-          contentContainerStyle={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}
           renderItem={({item}) => (
-            <View key={item.id} style={styles.tag}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              key={item.id}
+              style={styles.tag}>
               <Text style={{color: '#788DF3', fontFamily: FontFamily.Medium}}>
                 {item.name}
               </Text>
-            </View>
+            </TouchableOpacity>
           )}
         />
         <Text style={styles.heading}>Popular</Text>
         <FlatList
           data={popular}
-          contentContainerStyle={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}
+          numColumns={2}
           renderItem={({item}) => (
-            <View key={item.id} style={styles.tag}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              key={item.id}
+              style={styles.tag}>
               <Text style={{color: '#788DF3', fontFamily: FontFamily.Medium}}>
                 {item.name}
               </Text>
-            </View>
+            </TouchableOpacity>
           )}
         />
       </View>
@@ -102,11 +130,10 @@ const styles = StyleSheet.create({
   },
   search: {
     backgroundColor: '#F5F5F5',
-    borderRadius: 40,
+    borderRadius: responsiveWidth(10),
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#788DF3',
+    borderWidth: responsiveHeight(0.3),
   },
   heading: {
     fontFamily: FontFamily.Semi_Bold,
@@ -115,12 +142,12 @@ const styles = StyleSheet.create({
     marginVertical: responsiveHeight(3),
   },
   tag: {
-    padding: 10,
-    borderWidth: 3,
+    padding: responsiveHeight(1.4),
+    borderWidth: responsiveHeight(0.3),
     borderColor: '#788DF3',
-    paddingHorizontal: 15,
-    borderRadius: 30,
-    marginHorizontal: 2.5,
-    marginVertical: 4,
+    paddingHorizontal: responsiveWidth(3.5),
+    borderRadius: responsiveWidth(5),
+    marginHorizontal: responsiveWidth(0.5),
+    marginVertical: responsiveHeight(0.6),
   },
 });

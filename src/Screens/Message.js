@@ -13,57 +13,46 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import React from 'react';
+import React, {useState} from 'react';
 import {images} from '../utils';
+import {GiftedChat} from 'react-native-gifted-chat';
+import WrapperContainer from '../Components/WrapperContainer';
+import {useNavigation} from '@react-navigation/native';
 
 const Message = () => {
+  const [messages, setMessages] = useState([]);
+  const navigation = useNavigation();
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
-        <View style={styles.top}>
-          <View style={styles.left_container}>
-            <TouchableOpacity>
-              <Image source={images.back} style={styles.back} />
-            </TouchableOpacity>
-
-            <Image source={images.user1} style={styles.profile_image} />
-            <View>
-              <Text style={styles.user}>Martin Mork</Text>
-              <View style={styles.online}>
-                <View style={styles.dot}></View>
-                <Text style={styles.online_text}>Online</Text>
-              </View>
+    <WrapperContainer style={{flex: 1}}>
+      <View style={styles.top}>
+        <View style={styles.left_container}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}>
+            <Image source={images.back} style={styles.back} />
+          </TouchableOpacity>
+          <Image source={images.user1} style={styles.profile_image} />
+          <View>
+            <Text style={styles.user}>Martin Mork</Text>
+            <View style={styles.online}>
+              <View style={styles.dot}></View>
+              <Text style={styles.online_text}>Online</Text>
             </View>
           </View>
-
-          <TouchableOpacity>
-            <Image style={styles.call} source={images.call_icon} />
-          </TouchableOpacity>
         </View>
-        <View style={styles.container}>
-          <Text style={styles.text}>Today</Text>
-        </View>
-        <View style={{paddingHorizontal: 30, marginVertical: 8}}>
-          <View style={styles.message}>
-            <Text style={{color: 'black'}}>what what what what what</Text>
-          </View>
-        </View>
-        <View style={{paddingHorizontal: 30, marginVertical: 8}}>
-          <View style={styles.message1}>
-            <Text style={{color: 'white'}}>what what what what what</Text>
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.input_container}>
-        <TextInput placeholder="Type Something" style={styles.inp} />
-        <TouchableOpacity>
-          <Image
-            source={images.send_icon}
-            style={{width: responsiveWidth(12), height: responsiveWidth(12)}}
-          />
-        </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      <View style={{flex: 1, backgroundColor: '#ececec'}}>
+        <GiftedChat
+          placeholder="Type something"
+          messages={messages}
+          onSend={messages => onSend(messages)}
+          user={{
+            _id: 1,
+          }}
+        />
+      </View>
+    </WrapperContainer>
   );
 };
 

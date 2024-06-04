@@ -340,6 +340,9 @@ const ProductList = () => {
                 data={item.products}
                 renderItem={({item}) => (
                   <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate(NavigationStrings.PRODUCT_DETAILS);
+                    }}
                     activeOpacity={0.9}
                     key={item.id}
                     style={{gap: responsiveHeight(1)}}>
