@@ -29,7 +29,7 @@ const product = {
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed acpurus sed odio tincidunt lacinia. Etiam malesuada ultrices ex sit amet tincidunt.Nulla facilisi.Pellentesque eget velit vel tortor accumsan.',
 };
 
-const Cart = () => {
+const Productdetail = () => {
   const [selected, setselected] = useState(false);
   const [products, setproducts] = useState(0);
   const [addcart, setaddcart] = useState(false);
@@ -153,7 +153,7 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Productdetail;
 const styles = StyleSheet.create({
   dot: {
     width: 10,

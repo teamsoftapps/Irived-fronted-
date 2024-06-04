@@ -56,7 +56,9 @@ const Profile = () => {
     return (
       <TouchableOpacity
         onPress={() => {
-          item.id === 3
+          item.id === 1
+            ? navigation.navigate(NavigationStrings.PERSONAL_INFO)
+            : item.id === 3
             ? navigation.navigate(NavigationStrings.FAVOURITES)
             : null;
         }}

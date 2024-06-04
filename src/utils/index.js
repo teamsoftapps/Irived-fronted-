@@ -32,10 +32,12 @@ export const images = {
   discount: require('../assets/images/discount.png'),
   shop: require('../assets/images/shop.png'),
   scooter: require('../assets/images/scooter.png'),
+
   rectblur: require('../assets/images/rectblur.png'),
   heart: require('../assets/images/heart.png'),
   heart_filled: require('../assets/images/heart-filled.png'),
-  home: require('../assets/images/home-icon.png'),
+  home: require('../assets/images/home.png'),
+  home_icon: require('../assets/images/home-icon.png'),
   office: require('../assets/images/office_icon.png'),
   plus: require('../assets/images/Plus.png'),
   minus: require('../assets/images/Min.png'),
@@ -51,7 +53,9 @@ export const images = {
   offer_image: require('../assets/images/discount-img.png'),
   star: require('../assets/images/sitara.png'),
   nav: require('../assets/images/nav.png'),
-  bin_icon:require('../assets/images/bin-icon.png'),
+  bin_icon: require('../assets/images/bin-icon.png'),
+  Scooterr: require('../assets/images/scooter2.png'),
+  heart1: require('../assets/images/heart1.png'),
 };
 
 export const colors = {

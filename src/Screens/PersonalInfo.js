@@ -21,13 +21,13 @@ import {Personal_Info_Schema} from '../Schemas/Personal_info_schema';
 import {FontFamily, images} from '../utils';
 import ButtonComp from '../Components/ButtonComp';
 
-const Personal_Info = () => {
+const PersonalInfo = () => {
   const addresses = [
     {
       place: 'Home',
       address: '1497 wheet times square',
       id: 1,
-      icon: images.home,
+      icon: images.home_icon,
     },
     {
       place: 'Office',
@@ -39,7 +39,7 @@ const Personal_Info = () => {
       place: 'Home',
       address: '1497 wheet times square',
       id: 3,
-      icon: images.home,
+      icon: images.home_icon,
     },
     {
       place: 'Office',
@@ -48,6 +48,8 @@ const Personal_Info = () => {
       icon: images.office,
     },
   ];
+
+  console.log("okokokok")
   return (
     <WrapperContainer style={{backgroundColor: '#FFFFFF'}}>
       <HeaderComponent
@@ -69,19 +71,26 @@ const Personal_Info = () => {
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{width: responsiveWidth(87), alignSelf: 'center'}}>
+        style={{ width: responsiveWidth(87), alignSelf: 'center' }}>
         <Formik
           validationSchema={Personal_Info_Schema}
-          initialValues={{fullName: '', email: '', phone: '', address: ''}}
-          onSubmit={values =>
-            console.log(
-              values.fullName,
-              values.email,
-              values.phone,
-              values.address,
-            )
-          }>
-          {({}) => (
+          initialValues={{
+            fullName: '',
+            email: '',
+            phone: '',
+            address: '',
+          }}
+          onSubmit={values => {
+            console.log('done', values);
+          }}>
+          {({
+            handleChange,
+            handleSubmit,
+            handleBlur,
+            values,
+            errors,
+            touched,
+          }) => (
             <View>
               <View
                 style={{
@@ -89,8 +98,17 @@ const Personal_Info = () => {
                 }}>
                 <Text style={styles.label}>Full Name</Text>
                 <View style={styles.input_container}>
-                  <TextInput placeholder="Name" style={styles.input} />
+                  <TextInput
+                    value={values.fullName}
+                    onBlur={handleBlur('fullName')}
+                    onChangeText={handleChange('fullName')}
+                    placeholder="Name"
+                    style={styles.input}
+                  />
                 </View>
+                {touched.fullName && errors.fullName && (
+                  <Text style={{color: 'red'}}>{errors.fullName}</Text>
+                )}
               </View>
               <View
                 style={{
@@ -98,8 +116,16 @@ const Personal_Info = () => {
                 }}>
                 <Text style={styles.label}>Email</Text>
                 <View style={styles.input_container}>
-                  <TextInput placeholder="Email" style={styles.input} />
+                  <TextInput
+                    value={values.email}
+                    onChangeText={handleChange('email')}
+                    placeholder="Email"
+                    style={styles.input}
+                  />
                 </View>
+                {touched.email && errors.email && (
+                  <Text style={{color: 'red'}}>{errors.email}</Text>
+                )}
               </View>
               <View
                 style={{
@@ -108,11 +134,16 @@ const Personal_Info = () => {
                 <Text style={styles.label}>Phone</Text>
                 <View style={styles.input_container}>
                   <TextInput
+                    value={values.phone}
                     keyboardType="numeric"
+                    onChangeText={handleChange('phone')}
                     placeholder="Phone"
                     style={styles.input}
                   />
                 </View>
+                {touched.phone && errors.phone && (
+                  <Text style={{color: 'red'}}>{errors.phone}</Text>
+                )}
               </View>
               <View
                 style={{
@@ -120,8 +151,16 @@ const Personal_Info = () => {
                 }}>
                 <Text style={styles.label}>Add New Address</Text>
                 <View style={styles.input_container}>
-                  <TextInput placeholder="Address" style={styles.input} />
+                  <TextInput
+                    value={values.address}
+                    onChangeText={handleChange('address')}
+                    placeholder="Address"
+                    style={styles.input}
+                  />
                 </View>
+                {touched.address && errors.address && (
+                  <Text style={{color: 'red'}}>{errors.address}</Text>
+                )}
               </View>
               <FlatList
                 data={addresses}
@@ -150,7 +189,11 @@ const Personal_Info = () => {
               />
               <ButtonComp
                 text="Save"
-                style={{alignSelf: 'center', marginBottom: responsiveHeight(2)}}
+                onPress={() => {
+                  console.log('ok done', values);
+                  handleSubmit();
+                }}
+                style={{alignSelf: 'center', marginVertical: responsiveHeight(2)}}
               />
             </View>
           )}
@@ -160,7 +203,7 @@ const Personal_Info = () => {
   );
 };
 
-export default Personal_Info;
+export default PersonalInfo;
 
 const styles = StyleSheet.create({
   bin_icon: {

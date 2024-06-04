@@ -13,4 +13,9 @@ export default {
   FAVOURITES: 'Favourite',
   PRODUCTS_LIST: 'ProductList',
   REVIEW: 'Review',
+  PRODUCT_DETAILS: 'Productdetail',
+  PERSONAL_INFO: 'Personalinfo',
+  FAV_SHOP: 'FavShop',
+  FAV_PRODUCTS: 'FavProducts',
+  SEARCH: 'Search',
 };

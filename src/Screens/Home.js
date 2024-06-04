@@ -120,19 +120,31 @@ const Home = () => {
             style={styles.circleButton}>
             <Image source={images.bell} style={styles.icon} />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.9} style={styles.circleButton}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(NavigationStrings.Cart);
+            }}
+            activeOpacity={0.9}
+            style={styles.circleButton}>
             <Image source={images.cart} style={styles.icon} />
           </TouchableOpacity>
         </View>
       </View>
 
-      <TextInputComp
-        style={{
-          marginTop: responsiveHeight(2),
-          marginBottom: responsiveHeight(3),
-        }}
-        placeholder="Search products"
-      />
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => {
+          navigation.navigate(NavigationStrings.SEARCH);
+        }}>
+        <TextInputComp
+          editable={false}
+          style={{
+            marginTop: responsiveHeight(2),
+            marginBottom: responsiveHeight(3),
+          }}
+          placeholder="Search products"
+        />
+      </TouchableOpacity>
 
       <Text style={styles.cate}>Categories</Text>
       <View>

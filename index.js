@@ -7,8 +7,10 @@ import App from './App';
 import {name as appName} from './app.json';
 import {Provider} from 'react-redux';
 import {Store, persistor} from './src/Store/store';
-import Favourites from './src/Screens/Favourites';
+<<<<<<< Updated upstream
 import Filter from './src/Screens/Filter';
+=======
+>>>>>>> Stashed changes
 
 const Routes = () => {
   return (
@@ -17,4 +19,9 @@ const Routes = () => {
     </Provider>
   );
 };
+
+<<<<<<< Updated upstream
 AppRegistry.registerComponent(appName, () => App);
+=======
+AppRegistry.registerComponent(appName, () => Routes);
+>>>>>>> Stashed changes

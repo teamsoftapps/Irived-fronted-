@@ -8,6 +8,10 @@ import Favourites from '../Screens/Favourites';
 import ProductList from '../Screens/ProductList';
 import Review from '../Screens/Review';
 import Filter from '../Screens/Filter';
+import Cart from '../Screens/Cart';
+import Productdetail from '../Screens/Productdetail';
+import PersonalInfo from '../Screens/PersonalInfo';
+import Search from '../Screens/Search';
 
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
@@ -30,9 +34,19 @@ const MainStack = () => {
         component={ProductList}
       />
       <Stack.Screen name={NavigationStrings.REVIEW} component={Review} />
+      <Stack.Screen name={NavigationStrings.Filter} component={Filter} />
+
+      <Stack.Screen name={NavigationStrings.Cart} component={Cart} />
       <Stack.Screen
-        component={Filter}
-        name={NavigationStrings.Filter}></Stack.Screen>
+        name={NavigationStrings.PRODUCT_DETAILS}
+        component={Productdetail}
+      />
+
+      <Stack.Screen
+        name={NavigationStrings.PERSONAL_INFO}
+        component={PersonalInfo}
+      />
+      <Stack.Screen name={NavigationStrings.SEARCH} component={Search} />
     </Stack.Navigator>
   );
 };

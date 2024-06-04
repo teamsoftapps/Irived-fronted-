@@ -7,7 +7,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {FontFamily, images} from '../../utils';
 
-const TextInputComp = ({placeholder = '', style = {}}) => {
+const TextInputComp = ({placeholder = '', style = {}, editable = true}) => {
   return (
     <View style={{...styles.container, ...style}}>
       <Image
@@ -20,6 +20,7 @@ const TextInputComp = ({placeholder = '', style = {}}) => {
         }}
       />
       <TextInput
+        editable={editable}
         style={{
           flex: 1,
           fontSize: responsiveFontSize(2),

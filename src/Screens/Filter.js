@@ -7,13 +7,13 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import WrapperContainer from '../Components/WrapperContainer';
 import HeaderComponent from '../Components/Headers/HeaderComponent';
-
 import {
   responsiveFontSize,
   responsiveHeight,
+  responsiveScreenHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {Formik} from 'formik';
@@ -50,17 +50,18 @@ const Brands = [
 const ProductType = [
   {
     id: 1,
-    name: 'ALLO',
+    name: 'E-Liquid & Juices',
   },
   {
     id: 2,
-    name: 'Apple Drop',
+    name: 'Mods & Tanks',
   },
   {
     id: 3,
-    name: 'Banana Bang',
+    name: 'Pod Systems',
   },
 ];
+
 const Availability = [
   {
     id: 1,
@@ -71,7 +72,31 @@ const Availability = [
     name: 'Out of Stock',
   },
 ];
+
+// CheckBox Component
+const Checkbox = ({label, checked, onPress}) => {
+  return (
+    <View style={styles.Checkbox_container}>
+      <Text style={styles.categoryText}>{label}</Text>
+      <TouchableOpacity
+        onPress={onPress}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <View style={styles.checkbox_outer}>
+          {checked && <View style={styles.checkbox_inner} />}
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
 const Filter = () => {
+  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedAvail, setSelectedAvail] = useState(null);
+
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -86,733 +111,138 @@ const Filter = () => {
         }}
         top_text={'Filter'}
       />
-      <Formik
-        initialValues={{ALLO: '', age: ''}}
-        onSubmit={values => {
-          console.log('Form values:', values);
-        }}>
-        {({handleChange, handleSubmit, values}) => (
-          <>
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                gap: responsiveHeight(3),
-                position: 'relative',
-                flexGrow: 1,
 
-                alignItems: 'center',
-              }}>
-              {/* BRANDS */}
-              <Text style={styles.chackBoxHeading}>Brand</Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scroll_view}>
+        {/* FlatList For Brands */}
+        <Text style={styles.chackBoxHeading}>Brand</Text>
+        <FlatList
+          data={Brands}
+          renderItem={({item}) => (
+            <Checkbox
+              label={item.name}
+              checked={selectedBrand === item.id}
+              onPress={() =>
+                setSelectedBrand(item.id === selectedBrand ? null : item.id)
+              }
+            />
+          )}
+          keyExtractor={item => item.id}
+          contentContainerStyle={{gap: responsiveScreenHeight(3)}}
+        />
 
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
+        {/* FlatList for Product Type */}
+        <Text style={styles.chackBoxHeading}>Product Type</Text>
+        <FlatList
+          data={ProductType}
+          renderItem={({item}) => (
+            <Checkbox
+              label={item.name}
+              checked={selectedProduct === item.id}
+              onPress={() =>
+                setSelectedProduct(item.id === selectedProduct ? null : item.id)
+              }
+            />
+          )}
+          keyExtractor={item => item.id}
+          contentContainerStyle={{gap: responsiveScreenHeight(3)}}
+        />
 
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
+        {/* FLatList for Availibility */}
+        <Text style={styles.chackBoxHeading}>Availability</Text>
+        <FlatList
+          data={Availability}
+          renderItem={({item}) => (
+            <Checkbox
+              label={item.name}
+              checked={selectedAvail === item.id}
+              onPress={() =>
+                setSelectedAvail(item.id === selectedAvail ? null : item.id)
+              }
+            />
+          )}
+          keyExtractor={item => item.id}
+          contentContainerStyle={{gap: responsiveScreenHeight(3)}}
+        />
 
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              {/* PRODUCTS TYPE */}
-              <Text style={styles.chackBoxHeading}>Product Type</Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <Text style={styles.chackBoxHeading}>Availability</Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: responsiveWidth(80),
-                  justifyContent: 'space-between',
-                  // gap: responsiveHeight(2),
-                }}>
-                <Text style={styles.categoryText}>ALLO</Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // marginVertical: 5,
-                  }}
-                  onPress={() => handleChange('ALLO')('ALLO')}>
-                  <View
-                    style={{
-                      // backgroundColor: 'red',
-                      height: responsiveWidth(5),
-                      width: responsiveWidth(5),
-                      borderRadius: responsiveWidth(100),
-                      borderWidth: responsiveWidth(0.5),
-                      borderColor:
-                        values.ALLO === 'HTML' ? 'blue' : colors.secondary,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    {values.ALLO === 'ALLO' && (
-                      <View
-                        style={{
-                          height: responsiveWidth(3),
-                          width: responsiveWidth(3),
-                          borderRadius: responsiveWidth(100),
-                          backgroundColor: colors.secondary,
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-
-                {/* Render similar TouchableOpacity components for CSS and JavaScript options */}
-              </View>
-              <View style={{flexDirection: 'row'}}>
-                {/* Render TouchableOpacity components for age options similar to above */}
-              </View>
-            </ScrollView>
-            <View
-              style={{
-                position: '',
-                // bottom: 0,
-                top: 0,
-                zIndex: 100,
-                justifyContent: 'center',
-                // shadowColor: '#000',
-                // shadowOffset: {
-                //   width: 0,
-                //   height: 5,
-                // },
-                // shadowOpacity: 0.34,
-                // shadowRadius: 6.27,
-
-                // elevation: 10,
-                ...Platform.select({
-                  ios: {
-                    shadowColor: 'black',
-                    shadowOffset: {width: 0, height: 5}, // Vertical offset (adjust height as needed)
-                    shadowOpacity: 0.3,
-                    shadowRadius: 5,
-                  },
-                  android: {
-                    elevation: 2,
-                    shadowColor: 'gray',
-                  },
-                }),
-
-                height: responsiveHeight(13),
-                borderTopRightRadius: responsiveHeight(3),
-                borderTopLeftRadius: responsiveHeight(3),
-                width: responsiveWidth(100),
-              }}>
-              <ButtonComp
-                text="Submit"
-                style={{alignSelf: 'center', marginBottom: 0}}
-              />
-            </View>
-          </>
-        )}
-      </Formik>
+        <View style={{flexDirection: 'row'}}></View>
+      </ScrollView>
+      <View style={styles.bottom}>
+        <ButtonComp
+          text="Submit"
+          style={{alignSelf: 'center', marginBottom: 0}}
+        />
+      </View>
     </WrapperContainer>
   );
 };
 export default Filter;
 
 const styles = StyleSheet.create({
+  scroll_view: {
+    gap: responsiveHeight(3),
+    position: 'relative',
+    flexGrow: 1,
+    alignItems: 'center',
+  },
   chackBoxHeading: {
     marginTop: responsiveHeight(2.5),
     fontWeight: 'bold',
-    fontSize: responsiveFontSize(2),
+    fontSize: responsiveFontSize(2.7),
     color: 'black',
     textAlign: 'left',
     width: responsiveWidth(80),
     fontFamily: FontFamily.Bold,
   },
   categoryText: {
-    fontSize: responsiveFontSize(1.5),
+    fontSize: responsiveFontSize(2),
     color: 'black',
-    fontFamily: FontFamily.Regular,
+    fontFamily: FontFamily.Medium,
+  },
+  Checkbox_container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: responsiveWidth(80),
+    justifyContent: 'space-between',
+  },
+  checkbox_outer: {
+    height: responsiveWidth(6),
+    width: responsiveWidth(6),
+    borderRadius: responsiveWidth(100),
+    borderWidth: responsiveWidth(0.5),
+    borderColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkbox_inner: {
+    height: responsiveWidth(3),
+    width: responsiveWidth(3),
+    borderRadius: responsiveWidth(100),
+    backgroundColor: colors.secondary,
+  },
+  bottom: {
+    position: '',
+    top: 0,
+    zIndex: 100,
+    justifyContent: 'center',
+
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 5},
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+      },
+      android: {
+        elevation: 2,
+        shadowColor: 'gray',
+      },
+    }),
+
+    height: responsiveHeight(13),
+    borderTopRightRadius: responsiveHeight(3),
+    borderTopLeftRadius: responsiveHeight(3),
+    width: responsiveWidth(100),
   },
 });
