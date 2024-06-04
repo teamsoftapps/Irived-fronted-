@@ -12,6 +12,7 @@ import Cart from '../Screens/Cart';
 import Productdetail from '../Screens/Productdetail';
 import PersonalInfo from '../Screens/PersonalInfo';
 import Search from '../Screens/Search';
+import Checkout from '../Screens/Checkout';
 
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
@@ -47,6 +48,7 @@ const MainStack = () => {
         component={PersonalInfo}
       />
       <Stack.Screen name={NavigationStrings.SEARCH} component={Search} />
+      <Stack.Screen name={NavigationStrings.CHECKOUT} component={Checkout} />
     </Stack.Navigator>
   );
 };

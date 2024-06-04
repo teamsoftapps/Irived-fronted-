@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
@@ -20,6 +21,8 @@ import {
 import {FontFamily, images} from '../utils';
 import ButtonComp from '../Components/ButtonComp';
 import ModalComponent from '../Components/ModalComponent';
+import NavigationStrings from '../Navigations/NavigationStrings';
+import {useNavigation} from '@react-navigation/native';
 
 const products = [
   {
@@ -56,14 +59,17 @@ const products = [
 
 const Cart = () => {
   const [isVisible, setisVisible] = useState(false);
+  const navigation = useNavigation();
   return (
     <KeyboardAvoidingView style={{flex: 1}}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1}}>
-        <WrapperContainer style={{backgroundColor: '#F5F5F5'}}>
+        <WrapperContainer
+          style={{backgroundColor: '#F5F5F5'}}
+          statusbackgroundColor="#F5F5F5">
           <HeaderComponent
-            top_text="Cart"
+            text="Cart"
             style={{backgroundColor: '#F5F5F5'}}
             top_text_style={{
               marginLeft: responsiveWidth(-6),
@@ -126,21 +132,20 @@ const Cart = () => {
             />
           </View>
 
-          <View style={styles.copoun_container}>
-            <View style={styles.white_container}>
-              <TextInput
-                placeholder="Promo Code"
-                style={{width: responsiveWidth(50)}}
-                numberOfLines={1}
-              />
-              <TouchableOpacity style={styles.button}>
-                <Text
-                  style={{fontFamily: FontFamily.Extra_Bold, color: 'white'}}>
-                  Apply
-                </Text>
-              </TouchableOpacity>
-            </View>
+          {/* <View style={{...styles.copoun_container, backgroundColor: 'red'}}> */}
+          <View style={styles.white_container}>
+            <TextInput
+              placeholder="Promo Code"
+              style={{width: responsiveWidth(50)}}
+              numberOfLines={1}
+            />
+            <TouchableOpacity style={styles.button}>
+              <Text style={{fontFamily: FontFamily.Extra_Bold, color: 'white'}}>
+                Apply
+              </Text>
+            </TouchableOpacity>
           </View>
+          {/* </View> */}
           <View>
             <View style={styles.total_container}>
               <Text style={styles.left}>Subtotal</Text>
@@ -165,14 +170,7 @@ const Cart = () => {
               </View>
             </View>
           </View>
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: responsiveHeight(3),
-            }}>
-            <ButtonComp text="Proceed to Checkout" />
-          </View>
+
           <ModalComponent isVisible={isVisible} style={{}}>
             <View
               style={{
@@ -256,6 +254,19 @@ const Cart = () => {
             </View>
           </ModalComponent>
         </WrapperContainer>
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: Keyboard.isVisible ? responsiveHeight(4) : 0,
+          }}>
+          <ButtonComp
+            onPress={() => {
+              navigation.navigate(NavigationStrings.CHECKOUT);
+            }}
+            text="Proceed to Checkout"
+          />
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -316,6 +327,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     elevation: 3,
+    marginVertical: responsiveHeight(3),
+    alignSelf: 'center',
   },
   copoun_container: {
     alignItems: 'center',

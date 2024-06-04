@@ -18,4 +18,5 @@ export default {
   FAV_SHOP: 'FavShop',
   FAV_PRODUCTS: 'FavProducts',
   SEARCH: 'Search',
+  CHECKOUT: 'Checkout',
 };

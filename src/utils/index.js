@@ -47,7 +47,7 @@ export const images = {
   plus_slim: require('../assets/images/add_icon.png'),
   orders: require('../assets/images/orders.png'),
   message: require('../assets/images/message.png'),
-  profile: require('../assets/images/profile.png'),
+  profile: require('../assets/images/profile1.png'),
   vapshop: require('../assets/images/vapshop.jpg'),
   vapshop1: require('../assets/images/vapshop1.jpg'),
   offer_image: require('../assets/images/discount-img.png'),
