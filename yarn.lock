@@ -2770,6 +2770,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stripe/stripe-react-native@npm:^0.38.0":
+  version: 0.38.0
+  resolution: "@stripe/stripe-react-native@npm:0.38.0"
+  peerDependencies:
+    expo: ">=46.0.9"
+    react: "*"
+    react-native: "*"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: 5544eeaa7cae0a65ddf7a435e231d580496a5d940db6bd1b2c95cbd8d16ae014115e9378f1560315f5e213b6ab0a370171ee908c161f120be04709c29d221cce
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.1.14":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -3171,6 +3185,7 @@ __metadata:
     "@react-navigation/native": ^6.1.17
     "@react-navigation/native-stack": ^6.9.26
     "@reduxjs/toolkit": ^2.2.3
+    "@stripe/stripe-react-native": ^0.38.0
     "@types/react": ^18.2.6
     "@types/react-test-renderer": ^18.0.0
     babel-jest: ^29.6.3
