@@ -7,6 +7,7 @@ import MainStack from './src/Navigations/MainStack';
 import {NavigationContainer} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import authSlice from './src/Store/Slices/authSlice';
+import Extra from './src/Screens/Extra';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
@@ -15,7 +16,9 @@ const App = () => {
   const [state, setstate] = useState();
   return (
     <NavigationContainer>
-      {true ? <AuthStack /> : <MainStack />}
+      <Stack.Navigator>
+        <Stack.Screen options={{headerShown:false}} name='Extra' component={Extra}/>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
