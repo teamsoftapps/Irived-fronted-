@@ -56,7 +56,7 @@ const Login = () => {
       }
       setIsLoading(true);
 
-      const res = await apiRequest.post('/auth/login', body);
+      const res = await apiRequest.post('/auth/login/', body);
       console.log(res, 'response Message');
       console.log(res?.data);
       if (res?.data) {

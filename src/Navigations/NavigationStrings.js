@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export default {
   ON_BOARDING: 'onBoarding',
   LOG_IN: 'Login',
