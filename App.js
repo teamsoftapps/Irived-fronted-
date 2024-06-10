@@ -15,7 +15,7 @@ const App = () => {
   const [state, setstate] = useState();
   return (
     <NavigationContainer>
-      {true ? <AuthStack /> : <MainStack />}
+      {false ? <AuthStack /> : <MainStack />}
     </NavigationContainer>
   );
 };
