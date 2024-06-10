@@ -19,6 +19,7 @@ import {
 import {Formik} from 'formik';
 import {FontFamily, colors, images} from '../utils';
 import ButtonComp from '../Components/ButtonComp';
+import { useNavigation } from '@react-navigation/native';
 
 const Brands = [
   {
@@ -93,6 +94,7 @@ const Checkbox = ({label, checked, onPress}) => {
 };
 
 const Filter = () => {
+  const navigation = useNavigation()
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedAvail, setSelectedAvail] = useState(null);

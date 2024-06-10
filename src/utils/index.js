@@ -56,6 +56,10 @@ export const images = {
   bin_icon: require('../assets/images/bin-icon.png'),
   Scooterr: require('../assets/images/scooter2.png'),
   heart1: require('../assets/images/heart1.png'),
+  addcard: require('../assets/images/addcard.png'),
+  mastercard: require('../assets/images/mastercard.png'),
+  visacard: require('../assets/images/visa.png'),
+  COD: require('../assets/images/cod.png'),
 };
 
 export const colors = {
