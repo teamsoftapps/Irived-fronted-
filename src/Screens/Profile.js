@@ -1,3 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable prettier/prettier */
 import {
   StyleSheet,
   Text,
@@ -7,6 +11,8 @@ import {
   TextInput,
   FlatList,
   ScrollView,
+  Alert,
+  Platform,
 } from 'react-native';
 import React from 'react';
 import {
@@ -21,6 +27,12 @@ import WrapperContainer from '../Components/WrapperContainer';
 import ButtonComp from '../Components/ButtonComp';
 import {useNavigation} from '@react-navigation/native';
 import NavigationStrings from '../Navigations/NavigationStrings';
+// import {launchCamera} from 'react-native-image-crop-picker';
+import {launchCamera} from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
+import {useState} from 'react';
+// import {dummyUser} from '../lib/dummyUser.js';
+import axios from 'axios';
 
 const Profile_settings = [
   {
@@ -51,7 +63,113 @@ const Profile_settings = [
 ];
 
 const Profile = () => {
+  const [isVisible, setisVisible] = useState(false);
+  const [isVisible1, setisVisible1] = useState('');
+  const [image, setimage] = useState();
+  const [data, setdata] = useState({});
   const navigation = useNavigation();
+
+  //------------------
+  const changeProfile = () => {
+    Alert.alert(
+      'Do you want to Change Your Profile ',
+
+      '',
+
+      [
+        {
+          text: 'Cancel',
+          style: 'destructive',
+          onPress: () => {
+            console.log('object');
+          },
+        },
+        {
+          text: 'Select From Gallery',
+          onPress: () => {
+            ChooseFromGallery();
+          },
+        },
+        {
+          text: 'Take From Camera ',
+          onPress: () => {
+            ChooseFromCamera();
+          },
+        },
+      ],
+    );
+  };
+
+  const ChooseFromGallery = () => {
+    ImagePicker.openPicker({
+      cropping: true,
+    }).then(images => {
+      console.log('IMAAAAA', images);
+
+      // const formData = new FormData();
+
+      //--------------
+
+      //---------------
+      const imageUri = Platform.OS === 'ios' ? images.sourceURL : images.path;
+      setimage(imageUri);
+      sendImageToApi(imageUri);
+    });
+
+    const sendImageToApi = async imageUri => {
+      try {
+        const formData = new FormData();
+
+        // Convert file path to Blob
+        const response = await fetch(imageUri);
+        const blob = await response.blob();
+
+        // Append the image blob to FormData with a filename
+        formData.append('image', blob, 'sasas.jpg');
+
+        const apiUrl = 'http://localhost:3007/upload'; // Replace with your API endpoint
+
+        // Make the POST request to upload the image
+        const uploadResponse = await fetch(apiUrl, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            // Add any other headers as needed
+          },
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error('Failed to upload image');
+        }
+
+        // Parse the response JSON
+        const responseData = await uploadResponse.json();
+        console.log('API Response:', responseData);
+
+        // Handle success, update state or UI accordingly
+        Alert.alert('Success', 'Image uploaded successfully');
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        Alert.alert('Error', 'Failed to upload image. Please try again.');
+      }
+    };
+  };
+  const ChooseFromCamera = () => {
+    launchCamera({
+      cropping: true,
+    }).then(images => {
+      console.log('IMAAAAA', images.assets[0]);
+      const imageUri =
+        Platform.OS === 'ios'
+          ? images.assets[0].uri
+          : images.assets[0].originalPath;
+      setimage(imageUri);
+    });
+  };
+
+  //---------------
+
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
@@ -95,8 +213,13 @@ const Profile = () => {
           <View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={styles.top}>
-                <Image source={images.Profile} style={styles.profile_image} />
-                <TouchableOpacity style={styles.editImage}>
+                <Image
+                  source={image ? {uri: image} : images.Profile}
+                  style={styles.profile_image}
+                />
+                <TouchableOpacity
+                  onPress={() => changeProfile()}
+                  style={styles.editImage}>
                   <Image
                     source={images.editpro}
                     style={{
