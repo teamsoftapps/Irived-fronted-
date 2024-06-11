@@ -57,207 +57,210 @@ const products = [
 const Order = () => {
   const [isVisible, setisVisible] = useState(false);
   return (
-    <KeyboardAvoidingView style={{flex: 1}}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{flexGrow: 1}}>
-        <WrapperContainer style={{backgroundColor: '#F5F5F5'}}>
-          <HeaderComponent
-            top_text="Cart"
-            style={{backgroundColor: '#F5F5F5'}}
-            top_text_style={{
-              marginLeft: responsiveWidth(-6),
-              fontSize: responsiveFontSize(3),
-            }}
-            text_container_style={{
-              alignItems: 'center',
-              marginTop: responsiveHeight(2),
-            }}
-          />
-          <View style={{height: responsiveHeight(33)}}>
-            <FlatList
-              data={products}
-              showsVerticalScrollIndicator={false}
-              renderItem={({item}) => (
-                <View style={styles.list_container}>
-                  <View style={styles.imageContainer}>
-                    <Image source={item.image} style={styles.image} />
-                  </View>
-                  <View style={{width: responsiveWidth(65)}}>
-                    <View style={styles.top}>
-                      <Text style={styles.text}>{item.name}</Text>
-                      <TouchableOpacity
-                        onPress={() => {
-                          setisVisible(true);
-                        }}
-                        style={styles.cross}>
-                        <Image
-                          source={images.close_icon}
-                          style={{
-                            width: responsiveWidth(4),
-                            height: responsiveWidth(4),
-                          }}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                    <Text style={styles.description}>{item.description}</Text>
-                    <View style={styles.bottom}>
-                      <Text style={styles.price}>{item.price}</Text>
-                      <View style={styles.product_container}>
-                        <TouchableOpacity style={styles.product_button}>
-                          <Text style={styles.button_text}>-</Text>
-                        </TouchableOpacity>
-                        <Text
-                          style={{
-                            fontSize: responsiveFontSize(2),
-                            fontWeight: '800',
-                            color: 'black',
-                          }}>
-                          4
-                        </Text>
-                        <TouchableOpacity style={styles.product_button}>
-                          <Text style={styles.button_text}>+</Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              )}
-            />
-          </View>
+    <View>
+      <Text>sadassadsa</Text>
+    </View>
+    // <KeyboardAvoidingView style={{flex: 1}}>
+    //   <ScrollView
+    //     showsVerticalScrollIndicator={false}
+    //     contentContainerStyle={{flexGrow: 1}}>
+    //     <WrapperContainer style={{backgroundColor: '#F5F5F5'}}>
+    //       <HeaderComponent
+    //         top_text="Cart"
+    //         style={{backgroundColor: '#F5F5F5'}}
+    //         top_text_style={{
+    //           marginLeft: responsiveWidth(-6),
+    //           fontSize: responsiveFontSize(3),
+    //         }}
+    //         text_container_style={{
+    //           alignItems: 'center',
+    //           marginTop: responsiveHeight(2),
+    //         }}
+    //       />
+    //       <View style={{height: responsiveHeight(33)}}>
+    //         <FlatList
+    //           data={products}
+    //           showsVerticalScrollIndicator={false}
+    //           renderItem={({item}) => (
+    //             <View style={styles.list_container}>
+    //               <View style={styles.imageContainer}>
+    //                 <Image source={item.image} style={styles.image} />
+    //               </View>
+    //               <View style={{width: responsiveWidth(65)}}>
+    //                 <View style={styles.top}>
+    //                   <Text style={styles.text}>{item.name}</Text>
+    //                   <TouchableOpacity
+    //                     onPress={() => {
+    //                       setisVisible(true);
+    //                     }}
+    //                     style={styles.cross}>
+    //                     <Image
+    //                       source={images.close_icon}
+    //                       style={{
+    //                         width: responsiveWidth(4),
+    //                         height: responsiveWidth(4),
+    //                       }}
+    //                     />
+    //                   </TouchableOpacity>
+    //                 </View>
+    //                 <Text style={styles.description}>{item.description}</Text>
+    //                 <View style={styles.bottom}>
+    //                   <Text style={styles.price}>{item.price}</Text>
+    //                   <View style={styles.product_container}>
+    //                     <TouchableOpacity style={styles.product_button}>
+    //                       <Text style={styles.button_text}>-</Text>
+    //                     </TouchableOpacity>
+    //                     <Text
+    //                       style={{
+    //                         fontSize: responsiveFontSize(2),
+    //                         fontWeight: '800',
+    //                         color: 'black',
+    //                       }}>
+    //                       4
+    //                     </Text>
+    //                     <TouchableOpacity style={styles.product_button}>
+    //                       <Text style={styles.button_text}>+</Text>
+    //                     </TouchableOpacity>
+    //                   </View>
+    //                 </View>
+    //               </View>
+    //             </View>
+    //           )}
+    //         />
+    //       </View>
 
-          <View style={styles.copoun_container}>
-            <View style={styles.white_container}>
-              <TextInput
-                placeholder="Promo Code"
-                style={{width: responsiveWidth(50)}}
-                numberOfLines={1}
-              />
-              <TouchableOpacity style={styles.button}>
-                <Text
-                  style={{fontFamily: FontFamily.Extra_Bold, color: 'white'}}>
-                  Apply
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View>
-            <View style={styles.total_container}>
-              <Text style={styles.left}>Subtotal</Text>
-              <View style={styles.right}>
-                <Text style={styles.price}>$11.99</Text>
-                <Text style={styles.usd}>USD</Text>
-              </View>
-            </View>
-            <View style={styles.total_container}>
-              <Text style={styles.left}>Shipping</Text>
-              <View style={styles.right}>
-                <Text style={styles.price}>$4.99</Text>
-                <Text style={styles.usd}>USD</Text>
-              </View>
-            </View>
-            <View style={styles.total_container}>
-              <Text style={styles.left}>Total</Text>
-              <View style={styles.right}>
-                <Text style={styles.no_items}>({products.length} items)</Text>
-                <Text style={styles.price}>$11.99</Text>
-                <Text style={styles.usd}>USD</Text>
-              </View>
-            </View>
-          </View>
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: responsiveHeight(3),
-            }}>
-            <ButtonComp text="Proceed to Checkout" />
-          </View>
-          <ModalComponent isVisible={isVisible} style={{}}>
-            <View
-              style={{
-                backgroundColor: '#fff',
-                height: responsiveHeight(22),
-                borderRadius: responsiveHeight(1),
-                paddingHorizontal: responsiveWidth(4),
-                paddingTop: responsiveHeight(3),
-                width: responsiveWidth(80),
-                alignSelf: 'center',
-                justifyContent: 'center',
-                gap: responsiveHeight(2),
-              }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                <Text style={styles.Heading}>Remove Product</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    setisVisible(false);
-                  }}
-                  activeOpacity={0.8}
-                  style={{
-                    width: responsiveWidth(6),
-                    height: responsiveWidth(6),
-                    borderRadius: responsiveWidth(5),
-                    backgroundColor: '#d7d7d7',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <Image
-                    source={images.close_icon}
-                    style={{
-                      width: responsiveWidth(2.5),
-                      height: responsiveHeight(2.5),
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
+    //       <View style={styles.copoun_container}>
+    //         <View style={styles.white_container}>
+    //           <TextInput
+    //             placeholder="Promo Code"
+    //             style={{width: responsiveWidth(50)}}
+    //             numberOfLines={1}
+    //           />
+    //           <TouchableOpacity style={styles.button}>
+    //             <Text
+    //               style={{fontFamily: FontFamily.Extra_Bold, color: 'white'}}>
+    //               Apply
+    //             </Text>
+    //           </TouchableOpacity>
+    //         </View>
+    //       </View>
+    //       <View>
+    //         <View style={styles.total_container}>
+    //           <Text style={styles.left}>Subtotal</Text>
+    //           <View style={styles.right}>
+    //             <Text style={styles.price}>$11.99</Text>
+    //             <Text style={styles.usd}>USD</Text>
+    //           </View>
+    //         </View>
+    //         <View style={styles.total_container}>
+    //           <Text style={styles.left}>Shipping</Text>
+    //           <View style={styles.right}>
+    //             <Text style={styles.price}>$4.99</Text>
+    //             <Text style={styles.usd}>USD</Text>
+    //           </View>
+    //         </View>
+    //         <View style={styles.total_container}>
+    //           <Text style={styles.left}>Total</Text>
+    //           <View style={styles.right}>
+    //             <Text style={styles.no_items}>({products.length} items)</Text>
+    //             <Text style={styles.price}>$11.99</Text>
+    //             <Text style={styles.usd}>USD</Text>
+    //           </View>
+    //         </View>
+    //       </View>
+    //       <View
+    //         style={{
+    //           alignItems: 'center',
+    //           justifyContent: 'center',
+    //           marginTop: responsiveHeight(3),
+    //         }}>
+    //         <ButtonComp text="Proceed to Checkout" />
+    //       </View>
+    //       <ModalComponent isVisible={isVisible} style={{}}>
+    //         <View
+    //           style={{
+    //             backgroundColor: '#fff',
+    //             height: responsiveHeight(22),
+    //             borderRadius: responsiveHeight(1),
+    //             paddingHorizontal: responsiveWidth(4),
+    //             paddingTop: responsiveHeight(3),
+    //             width: responsiveWidth(80),
+    //             alignSelf: 'center',
+    //             justifyContent: 'center',
+    //             gap: responsiveHeight(2),
+    //           }}>
+    //           <View
+    //             style={{
+    //               flexDirection: 'row',
+    //               justifyContent: 'space-between',
+    //               alignItems: 'center',
+    //             }}>
+    //             <Text style={styles.Heading}>Remove Product</Text>
+    //             <TouchableOpacity
+    //               onPress={() => {
+    //                 setisVisible(false);
+    //               }}
+    //               activeOpacity={0.8}
+    //               style={{
+    //                 width: responsiveWidth(6),
+    //                 height: responsiveWidth(6),
+    //                 borderRadius: responsiveWidth(5),
+    //                 backgroundColor: '#d7d7d7',
+    //                 alignItems: 'center',
+    //                 justifyContent: 'center',
+    //               }}>
+    //               <Image
+    //                 source={images.close_icon}
+    //                 style={{
+    //                   width: responsiveWidth(2.5),
+    //                   height: responsiveHeight(2.5),
+    //                 }}
+    //               />
+    //             </TouchableOpacity>
+    //           </View>
 
-              <Text
-                style={{
-                  fontFamily: FontFamily.Semi_Bold,
+    //           <Text
+    //             style={{
+    //               fontFamily: FontFamily.Semi_Bold,
 
-                  fontSize: responsiveFontSize(1.8),
-                }}>
-                Remove item from cart?
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                <ButtonComp
-                  onPress={() => {
-                    setisVisible(false);
-                  }}
-                  style={{
-                    width: responsiveWidth(35),
-                    height: responsiveHeight(6),
-                    backgroundColor: '#d7d7d7',
-                  }}
-                  textstyle={{color: '#000'}}
-                  text="Cancel"
-                />
-                <ButtonComp
-                  onPress={() => {
-                    setisVisible(false);
-                  }}
-                  style={{
-                    width: responsiveWidth(35),
-                    height: responsiveHeight(6),
-                  }}
-                  text="Remove"
-                />
-              </View>
-            </View>
-          </ModalComponent>
-        </WrapperContainer>
-      </ScrollView>
-    </KeyboardAvoidingView>
+    //               fontSize: responsiveFontSize(1.8),
+    //             }}>
+    //             Remove item from cart?
+    //           </Text>
+    //           <View
+    //             style={{
+    //               flexDirection: 'row',
+    //               justifyContent: 'space-between',
+    //               alignItems: 'center',
+    //             }}>
+    //             <ButtonComp
+    //               onPress={() => {
+    //                 setisVisible(false);
+    //               }}
+    //               style={{
+    //                 width: responsiveWidth(35),
+    //                 height: responsiveHeight(6),
+    //                 backgroundColor: '#d7d7d7',
+    //               }}
+    //               textstyle={{color: '#000'}}
+    //               text="Cancel"
+    //             />
+    //             <ButtonComp
+    //               onPress={() => {
+    //                 setisVisible(false);
+    //               }}
+    //               style={{
+    //                 width: responsiveWidth(35),
+    //                 height: responsiveHeight(6),
+    //               }}
+    //               text="Remove"
+    //             />
+    //           </View>
+    //         </View>
+    //       </ModalComponent>
+    //     </WrapperContainer>
+    //   </ScrollView>
+    // </KeyboardAvoidingView>
   );
 };
 

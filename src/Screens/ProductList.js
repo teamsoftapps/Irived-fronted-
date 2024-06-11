@@ -17,8 +17,11 @@ import WrapperContainer from '../Components/WrapperContainer';
 import {FontFamily, images} from '../utils';
 import {useNavigation} from '@react-navigation/native';
 import NavigationStrings from '../Navigations/NavigationStrings';
+import {useSelector} from 'react-redux';
 
 const ProductList = () => {
+  const CartItem = useSelector(state => state.Cart.items);
+  console.log('Cart ', CartItem);
   const storeData = [
     {
       id: 1,
@@ -28,7 +31,11 @@ const ProductList = () => {
           id: 11,
           name: 'BlueBerry Blasts',
           price: '$11.99',
-          image: images.product,
+          Image: [
+            {image: images.product, id: 0},
+            {image: images.product1, id: 1},
+            {image: images.product2, id: 2},
+          ],
         },
         {id: 12, name: 'Mango Tango', price: '$15.99', image: images.product1},
       ],
@@ -41,7 +48,11 @@ const ProductList = () => {
           id: 21,
           name: 'BlueBerry Blast',
           price: '$11.99',
-          image: images.product,
+          Image: [
+            {image: images.product, id: 0},
+            {image: images.product1, id: 1},
+            {image: images.product2, id: 2},
+          ],
         },
         {id: 22, name: 'Mango Tango', price: '$15.99', image: images.product1},
       ],
@@ -54,7 +65,11 @@ const ProductList = () => {
           id: 31,
           name: 'BlueBerry Blast',
           price: '$11.99',
-          image: images.product,
+          Image: [
+            {image: images.product, id: 0},
+            {image: images.product1, id: 1},
+            {image: images.product2, id: 2},
+          ],
         },
         {id: 32, name: 'Mango Tango', price: '$15.99', image: images.product1},
         {id: 33, name: 'Sour Punch', price: '$19.99', image: images.product2},
@@ -62,7 +77,11 @@ const ProductList = () => {
           id: 34,
           name: 'RaspBerry Smoke',
           price: '$10.99',
-          image: images.product,
+          Image: [
+            {image: images.product, id: 0},
+            {image: images.product1, id: 1},
+            {image: images.product2, id: 2},
+          ],
         },
       ],
     },
@@ -74,7 +93,11 @@ const ProductList = () => {
           id: 41,
           name: 'BlueBerry Blast',
           price: '$11.99',
-          image: images.product,
+          Image: [
+            {image: images.product, id: 0},
+            {image: images.product1, id: 1},
+            {image: images.product2, id: 2},
+          ],
         },
         {id: 42, name: 'Mango Tango', price: '$15.99', image: images.product1},
       ],
@@ -87,7 +110,11 @@ const ProductList = () => {
           id: 51,
           name: 'BlueBerry Blast',
           price: '$11.99',
-          image: images.product,
+          Image: [
+            {image: images.product, id: 0},
+            {image: images.product1, id: 1},
+            {image: images.product2, id: 2},
+          ],
         },
         {id: 52, name: 'Mango Tango', price: '$15.99', image: images.product1},
         {id: 53, name: 'Sour Punch', price: '$19.99', image: images.product2},
@@ -341,20 +368,31 @@ const ProductList = () => {
                 renderItem={({item}) => (
                   <TouchableOpacity
                     onPress={() => {
-                      navigation.navigate(NavigationStrings.PRODUCT_DETAILS);
+                      console.log('New', item.Image);
+                      // navigation.navigate(NavigationStrings.PRODUCT_DETAILS, {
+                      //   data: item,
+                      // });
                     }}
                     activeOpacity={0.9}
                     key={item.id}
                     style={{gap: responsiveHeight(1)}}>
-                    <Image
-                      source={item.image}
+                    {/* {item?.Image[0]?.map((item, index) => {
+                      // if (item.id !== 0) {
+                      //   return;
+                      // }
+                      return ( */}
+                    {/* <Image
+                      source={item?.Image[1].image}
                       style={{
                         width: responsiveWidth(35),
                         height: responsiveWidth(35),
                         backgroundColor: 'white',
                         borderRadius: responsiveWidth(3),
                       }}
-                    />
+                    /> */}
+                    {/* );
+                    })} */}
+
                     <View
                       style={{
                         flexDirection: 'row',
@@ -378,7 +416,7 @@ const ProductList = () => {
                             fontSize: responsiveFontSize(1.8),
                             color: '#4361EE',
                           }}>
-                          $12.67
+                          {item.price}
                         </Text>
                       </View>
                       <View
@@ -386,7 +424,7 @@ const ProductList = () => {
                           justifyContent: 'center',
                           alignItems: 'center',
                         }}>
-                        <TouchableOpacity
+                        <View
                           activeOpacity={0.9}
                           style={{
                             borderRadius: responsiveWidth(30),
@@ -400,7 +438,7 @@ const ProductList = () => {
                               height: responsiveWidth(3.5),
                             }}
                           />
-                        </TouchableOpacity>
+                        </View>
                       </View>
                     </View>
                   </TouchableOpacity>

@@ -23,39 +23,40 @@ import ButtonComp from '../Components/ButtonComp';
 import ModalComponent from '../Components/ModalComponent';
 import NavigationStrings from '../Navigations/NavigationStrings';
 import {useNavigation} from '@react-navigation/native';
+import {products} from '../lib/dummyProducts';
 
-const products = [
-  {
-    name: 'BlueBerry Blast',
-    description: '30 mL 10mg',
-    price: '$11.99',
-    image: images.product,
-  },
-  {
-    name: 'Mango Tango',
-    description: '40 mL 10mg',
-    price: '$16.99',
-    image: images.product1,
-  },
-  {
-    name: 'RaspBerry Fruity',
-    description: '20 mL 10mg',
-    price: '$10.49',
-    image: images.product2,
-  },
-  {
-    name: 'BlueBerry Blast',
-    description: '30 mL 10mg',
-    price: '$11.99',
-    image: images.product,
-  },
-  {
-    name: 'Mango Tango',
-    description: '40 mL 10mg',
-    price: '$16.99',
-    image: images.product1,
-  },
-];
+// const products = [
+//   {
+//     name: 'BlueBerry Blast',
+//     description: '30 mL 10mg',
+//     price: '$11.99',
+//     image: images.product,
+//   },
+//   {
+//     name: 'Mango Tango',
+//     description: '40 mL 10mg',
+//     price: '$16.99',
+//     image: images.product1,
+//   },
+//   {
+//     name: 'RaspBerry Fruity',
+//     description: '20 mL 10mg',
+//     price: '$10.49',
+//     image: images.product2,
+//   },
+//   {
+//     name: 'BlueBerry Blast',
+//     description: '30 mL 10mg',
+//     price: '$11.99',
+//     image: images.product,
+//   },
+//   {
+//     name: 'Mango Tango',
+//     description: '40 mL 10mg',
+//     price: '$16.99',
+//     image: images.product1,
+//   },
+// ];
 
 const Cart = () => {
   const [isVisible, setisVisible] = useState(false);
@@ -87,11 +88,11 @@ const Cart = () => {
               renderItem={({item}) => (
                 <View style={styles.list_container}>
                   <View style={styles.imageContainer}>
-                    <Image source={item.image} style={styles.image} />
+                    <Image source={item.img} style={styles.image} />
                   </View>
                   <View style={{width: responsiveWidth(65)}}>
                     <View style={styles.top}>
-                      <Text style={styles.text}>{item.name}</Text>
+                      <Text style={styles.text}>{item.title}</Text>
                       <TouchableOpacity
                         onPress={() => {
                           setisVisible(true);
@@ -106,7 +107,7 @@ const Cart = () => {
                         />
                       </TouchableOpacity>
                     </View>
-                    <Text style={styles.description}>{item.description}</Text>
+                    <Text style={styles.description}>{item.desc}</Text>
                     <View style={styles.bottom}>
                       <Text style={styles.price}>{item.price}</Text>
                       <View style={styles.product_container}>

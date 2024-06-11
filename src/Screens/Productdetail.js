@@ -16,6 +16,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import ButtonComp from '../Components/ButtonComp';
+import {useRoute} from '@react-navigation/native';
 
 const product = {
   name: 'Blueberry Blast',
@@ -35,10 +36,14 @@ const Productdetail = () => {
   const [addcart, setaddcart] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  console.log(currentIndex);
+  const {data} = useRoute().params || {};
+
+  console.log('NewData', data);
 
   return (
-    <WrapperContainer style={{backgroundColor: '#F5F5F5'}}>
+    <WrapperContainer
+      style={{backgroundColor: '#F5F5F5'}}
+      statusbackgroundColor="#F5F5F5">
       <View style={styles.topbar_container}>
         <TouchableOpacity style={{marginLeft: responsiveWidth(6)}}>
           <Image

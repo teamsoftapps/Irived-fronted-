@@ -16,9 +16,7 @@ const App = () => {
   const [state, setstate] = useState();
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen options={{headerShown:false}} name='Extra' component={Extra}/>
-      </Stack.Navigator>
+      {false ? <AuthStack /> : <MainStack />}
     </NavigationContainer>
   );
 };

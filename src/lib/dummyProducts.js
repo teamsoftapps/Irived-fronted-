@@ -1,11 +1,13 @@
-export const products = {
-  products: [
+import {images} from '../utils';
+
+export const // products = {
+  products = [
     {
       id: '1',
       createdAt: '2024-06-07T12:00:00Z',
       title: 'Product A',
-      desc: 'Description for Product A',
-      img: 'product_a.jpg',
+      desc: '20 mL 10mg',
+      img: images.product,
       price: 49.99,
       isFeatured: true,
       options: [
@@ -27,7 +29,8 @@ export const products = {
       id: '2',
       createdAt: '2024-06-07T12:00:00Z',
       title: 'Product B',
-      desc: 'Description for Product B',
+      desc: '20 mL 10mg',
+      img: images.product1,
       price: 29.99,
       options: [{size: 'Medium', color: 'Green'}],
       category: {
@@ -41,5 +44,5 @@ export const products = {
       },
       catSlug: 'category-b',
     },
-  ],
-};
+  ];
+// };
